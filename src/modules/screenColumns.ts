@@ -19,13 +19,13 @@ const myVideoTexture = new VideoTexture(myVideoClip1)
 
 let uvMat = new Material()
 uvMat.albedoTexture = kittyTexture
-//uvMat.emissiveTexture = myVideoTexture
+uvMat.emissiveTexture = kittyTexture
 //uvMat.alphaTexture = alphaBlackTexture
 uvMat.transparencyMode = 2
 //uvMat.emissiveColor = Color3.White()
-uvMat.roughness = 0
-uvMat.specularIntensity = 1
-uvMat.metallic = 0.7
+uvMat.roughness = 0.5
+uvMat.specularIntensity = 0
+uvMat.metallic = 0.1
 
 let uvMat2 = new Material()
 uvMat2.albedoTexture = myVideoTexture
@@ -41,14 +41,14 @@ uvMat2.metallic = 0.7
 myVideoTexture.loop = true
 myVideoTexture.playing = true
 
-const canvas = new UICanvas()
+// const canvas = new UICanvas()
 
-let uiInstruction = new UIText(canvas)
-uiInstruction.value = 'Click to start video' 
-uiInstruction.hAlign = 'center' 
-uiInstruction.vAlign = 'center' 
-uiInstruction.hTextAlign = 'center' 
-uiInstruction.vTextAlign = 'center' 
+// let uiInstruction = new UIText(canvas)
+// uiInstruction.value = 'Click to start video' 
+// uiInstruction.hAlign = 'center' 
+// uiInstruction.vAlign = 'center' 
+// uiInstruction.hTextAlign = 'center' 
+// uiInstruction.vTextAlign = 'center' 
 
 
 let projectorColumns = new Projector(new Vector3(scene.columnsCenter.x, scene.columnsCenter.y+ 3 ,scene.columnsCenter.z), new Vector3(4,4,1), Quaternion.Euler(0,0,0), false)
@@ -100,26 +100,26 @@ class ColumnScreen {
       _isTwoSided, 
       _mat)
 
-    let screen2 = new Screen({
-      position: new Vector3(_pos.x - _radius/2, _pos.y + _height/2, _pos.z),
-      rotation: Quaternion.Euler(0,270,0),
-      scale: new Vector3(_radius, _height,1)},
-      _isTwoSided, 
-      _mat)
+    // let screen2 = new Screen({
+    //   position: new Vector3(_pos.x - _radius/2, _pos.y + _height/2, _pos.z),
+    //   rotation: Quaternion.Euler(0,270,0),
+    //   scale: new Vector3(_radius, _height,1)},
+    //   _isTwoSided, 
+    //   _mat)
 
-    let screen3 = new Screen({
-      position: new Vector3(_pos.x, _pos.y + _height/2, _pos.z + _radius/2),
-      rotation: Quaternion.Euler(0,0,0),
-      scale: new Vector3(_radius, _height,1)},
-      _isTwoSided, 
-      _mat)
+    // let screen3 = new Screen({
+    //   position: new Vector3(_pos.x, _pos.y + _height/2, _pos.z + _radius/2),
+    //   rotation: Quaternion.Euler(0,0,0),
+    //   scale: new Vector3(_radius, _height,1)},
+    //   _isTwoSided, 
+    //   _mat)
 
-    let screen4 = new Screen({
-      position: new Vector3(_pos.x, _pos.y + _height/2, _pos.z - _radius/2),
-      rotation: Quaternion.Euler(0,180,0),
-      scale: new Vector3(_radius, _height,1)},
-      _isTwoSided, 
-      _mat)  
+    // let screen4 = new Screen({
+    //   position: new Vector3(_pos.x, _pos.y + _height/2, _pos.z - _radius/2),
+    //   rotation: Quaternion.Euler(0,180,0),
+    //   scale: new Vector3(_radius, _height,1)},
+    //   _isTwoSided, 
+    //   _mat)  
 
     // let aoBottom = new Entity()
     // aoBottom.addComponent(new Transform({position: _pos, scale: new Vector3(_radius,_radius,_radius)}))
@@ -132,41 +132,48 @@ class ColumnScreen {
     // engine.addEntity(aoTop)
 
       group.addSCreen(screen1)
-      group.addSCreen(screen2)
-      group.addSCreen(screen3)
-      group.addSCreen(screen4)
+      // group.addSCreen(screen2)
+      // group.addSCreen(screen3)
+      // group.addSCreen(screen4)
 
       this.screens.push(screen1)
-      this.screens.push(screen2)
-      this.screens.push(screen3)
-      this.screens.push(screen4)
+     // this.screens.push(screen2)
+      // this.screens.push(screen3)
+      // this.screens.push(screen4)
     }
 
-    //WRONG!!
-    updateColumn(_pos:Vector3, _radius:number, _height:number, _mat:Material){
-      this.screens[0] = new Screen({
-        position: new Vector3(_pos.x + _radius/2, _pos.y + _height/2, _pos.z),
-        rotation: Quaternion.Euler(0,90,0),
-        scale: new Vector3(_radius, _height,1)},
-        false, _mat)
+    
+    updateColumn(_pos:Vector3, _rotation:Quaternion, _radius:number, _height:number, _mat:Material){
+
+      this.screens[0].getComponent(Transform).position.set(_pos.x + _radius/2, _pos.y + _height/2, _pos.z) 
+      this.screens[0].getComponent(Transform).rotation.copyFrom(_rotation)
+      this.screens[0].getComponent(Transform).scale = new Vector3(_radius, _height,1)
+
+      // this.screens[1].getComponent(Transform).position.set(_pos.x - _radius/2, _pos.y + _height/2, _pos.z)
+      // this.screens[1].getComponent(Transform).rotation.copyFrom(_rotation)
+      // this.screens[1].getComponent(Transform).scale = new Vector3(_radius, _height,1)
+
+
+
   
-      this.screens[1] = new Screen({
-        position: new Vector3(_pos.x - _radius/2, _pos.y + _height/2, _pos.z),
-        rotation: Quaternion.Euler(0,90,0),
-        scale: new Vector3(_radius, _height,1)},
-        false, _mat)
   
-      this.screens[2] = new Screen({
-        position: new Vector3(_pos.x, _pos.y + _height/2, _pos.z + _radius/2),
-        rotation: Quaternion.Euler(0,0,0),
-        scale: new Vector3(_radius, _height,1)},
-        false, _mat)
+      // this.screens[1] = new Screen({
+      //   position: new Vector3(_pos.x - _radius/2, _pos.y + _height/2, _pos.z),
+      //   rotation: Quaternion.Euler(0,90,0),
+      //   scale: new Vector3(_radius, _height,1)},
+      //   false, _mat)
   
-      this.screens[3] = new Screen({
-        position: new Vector3(_pos.x, _pos.y + _height/2, _pos.z - _radius/2),
-        rotation: Quaternion.Euler(0,0,0),
-        scale: new Vector3(_radius, _height,1)},
-        false, _mat)  
+      // this.screens[2] = new Screen({
+      //   position: new Vector3(_pos.x, _pos.y + _height/2, _pos.z + _radius/2),
+      //   rotation: Quaternion.Euler(0,0,0),
+      //   scale: new Vector3(_radius, _height,1)},
+      //   false, _mat)
+  
+      // this.screens[3] = new Screen({
+      //   position: new Vector3(_pos.x, _pos.y + _height/2, _pos.z - _radius/2),
+      //   rotation: Quaternion.Euler(0,0,0),
+      //   scale: new Vector3(_radius, _height,1)},
+      //   false, _mat)  
   
     }
 
@@ -303,12 +310,10 @@ function addColumnGrid(_rows:number, _cols:number, _center:Vector3){
   // }
 }
 
+let columnsRight:ColumnScreen[] = []
+let columnsLeft:ColumnScreen[] = []
 
-function addColumnCircle(count:number, center:Vector3, radius:number){
-
-
-
- 
+function addColumnCircle(count:number, center:Vector3, radius:number){ 
 
   for(let i=0; i < count; i++){
 
@@ -321,6 +326,24 @@ function addColumnCircle(count:number, center:Vector3, radius:number){
       columnHeight,
       false,
       uvMat)
+
+      columnsRight.push(column)
+   
+  }
+
+  for(let i=0; i < count; i++){
+
+    let angle = 320/count *i
+
+    let column = new ColumnScreen(
+      ScreenGrpColumns,  
+     center.add(Vector3.Backward().rotate(Quaternion.Euler(0,angle,0)).multiplyByFloats(radius,radius,radius)), 
+      columnScale, 
+      columnHeight,
+      false,
+      uvMat)
+
+      columnsLeft.push(column)
    
   }
 
@@ -340,7 +363,8 @@ addColumnCircle(10, scene.venueCenter,3)
 
 class rotateTestSystem {
 
-  
+  angleRight:number = 0
+  angleLeft:number = 0
 
   update(dt:number){
     
@@ -356,24 +380,31 @@ class rotateTestSystem {
 
    ScreenGrpColumns.updateScreens(player.position)
    ScreenGrpScatter.updateScreens(player.position)
+
+   
    //ScreenGroupFloor.updateScreens(player.position)
+
+
+   for(let i = 0; i< columnsRight.length; i++){
+     this.angleRight -= 4* dt
+     let radius = 2.2     
+    let offset = 360/columnsRight.length *i
+      
+     let pos =  scene.venueCenter.add(Vector3.Backward().rotate(Quaternion.Euler(0,this.angleRight +offset ,0)).multiplyByFloats(radius,radius,radius))
+     columnsRight[i].updateColumn(pos, Quaternion.Euler(0, 180 + this.angleRight + offset, 30),1.2, columnHeight, uvMat )
+   }
+
+   for(let i = 0; i< columnsLeft.length; i++){
+     this.angleLeft += 4* dt
+     let radius = 2.2     
+    let offset = 360/columnsLeft.length *i
+      
+     let pos =  scene.venueCenter.add(Vector3.Backward().rotate(Quaternion.Euler(0,this.angleLeft +offset ,0)).multiplyByFloats(radius,radius,radius))
+     columnsLeft[i].updateColumn(pos, Quaternion.Euler(0, 180 + this.angleLeft + offset, -30),1.2, columnHeight, uvMat )
+   }
  
   }
 }
 engine.addSystem(new rotateTestSystem())
 
 
-const input = Input.instance
-input.subscribe("BUTTON_DOWN", ActionButton.POINTER, true, e => {
-  //log("pointer POINTER Down", e)    
-  //uvMat.albedoTexture = myVideoTexture
-myVideoTexture.loop = true
-myVideoTexture.playing = true
-
-
-
-uiInstruction.visible = false
-
-
-  
-})
