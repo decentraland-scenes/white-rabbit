@@ -1,45 +1,164 @@
 import { scene } from "./scene";
 import { Projector } from "./projector";
-import { Screen, ScreenGroup } from "./screens";
+import { Screen, ScreenGroup, PlaneUVData} from "./screens";
 
 const player = Camera.instance
 
 let uvCheckerTexture = new Texture('textures/uv_checker.png', {samplingMode: 2})
 let alphaBlackTexture = new Texture('textures/alpha.png', {samplingMode: 2})
-let kittyTexture = new Texture('textures/kitty.png', {samplingMode: 2, wrap:0})
-
+export let kittyTexture = new Texture('textures/kitty.png', {samplingMode: 2, wrap:0})
+export let dclLogoTexture = new Texture('textures/dcl_logo.png', {samplingMode: 2, wrap:0})
+let ledMaskTexture = new Texture('textures/led_wall_mask.png', {samplingMode:2})
 //let aoShape =  new GLTFShape('models/ao_column.glb')
 
 const myVideoClip1 = new VideoClip(
-  'textures/cc_video.mp4'
+  'textures/test.mp4'
 )
 const myVideoTexture = new VideoTexture(myVideoClip1)
 
-
+let screenBGShape = new GLTFShape("models/screen_bg.glb")
 
 let uvMat = new Material()
-uvMat.albedoTexture = kittyTexture
-uvMat.emissiveTexture = kittyTexture
+uvMat.albedoTexture = dclLogoTexture
+uvMat.emissiveTexture = dclLogoTexture
 //uvMat.alphaTexture = alphaBlackTexture
 uvMat.transparencyMode = 2
-//uvMat.emissiveColor = Color3.White()
+uvMat.emissiveColor = Color3.Gray()
 uvMat.roughness = 0.5
 uvMat.specularIntensity = 0
 uvMat.metallic = 0.1
 
-let uvMat2 = new Material()
-uvMat2.albedoTexture = myVideoTexture
-//uvMat.emissiveTexture = myVideoTexture
-//uvMat.alphaTexture = alphaBlackTexture
-uvMat2.transparencyMode = 2
-//uvMat.emissiveColor = Color3.White()
-uvMat2.roughness = 0
-uvMat2.specularIntensity = 1
-uvMat2.metallic = 0.7
 
+let screen1StretchUV = new PlaneUVData(
+  new Vector2(0.33, 0),
+  new Vector2(0, 0),
+  new Vector2(0, 1 ),
+  new Vector2(0.33, 1)
+)
+
+let screen2StretchUV = new PlaneUVData(
+  new Vector2(0.66, 0),
+  new Vector2(0.33, 0),
+  new Vector2(0.33, 1 ),
+  new Vector2(0.66, 1)
+)
+
+let screen3StretchUV = new PlaneUVData(
+  new Vector2(1, 0),
+  new Vector2(0.66, 0),
+  new Vector2(0.66, 1 ),
+  new Vector2(1, 1)
+)
+
+let ledWallMat = new Material()
+ledWallMat.albedoTexture = myVideoTexture
+ledWallMat.emissiveTexture = myVideoTexture
+//ledWallMat.alphaTexture = ledMaskTexture
+ledWallMat.transparencyMode = 2
+ledWallMat.emissiveColor = Color3.White()
+ledWallMat.roughness = 1
+ledWallMat.specularIntensity = 0
+ledWallMat.metallic = 0
+
+
+
+export function changeTexture(texture:Texture){
+  uvMat.albedoTexture = texture
+  uvMat.emissiveTexture = texture
+}
 
 myVideoTexture.loop = true
 myVideoTexture.playing = true
+
+ const ledWallHeight = 2.9
+
+let ledWall = new Screen({
+  position: new Vector3(scene.venueCenter.x + 15.5, scene.venueCenter.y + ledWallHeight, scene.venueCenter.z),
+  rotation: Quaternion.Euler(0,-90,180),
+  scale: new Vector3(8,4,1)
+},
+false,
+ledWallMat,
+screen2StretchUV
+)
+
+let ledWall2 = new Screen({
+  position: new Vector3(scene.venueCenter.x + 13, scene.venueCenter.y + ledWallHeight, scene.venueCenter.z-7.8),
+  rotation: Quaternion.Euler(0,-55,180),
+  scale: new Vector3(8,4,1)
+},
+false,
+ledWallMat,
+screen3StretchUV
+)
+
+let ledWall3 = new Screen({
+  position: new Vector3(scene.venueCenter.x + 13, scene.venueCenter.y + ledWallHeight, scene.venueCenter.z+7.8),
+  rotation: Quaternion.Euler(0,-125,180),
+  scale: new Vector3(8,4,1)
+},
+false,
+ledWallMat,
+screen1StretchUV
+)
+// ledWall.addComponent(new Transform({
+//   position: new Vector3(scene.venueCenter.x + 15.5, scene.venueCenter.y + ledWallHeight, scene.venueCenter.z),
+//   rotation: Quaternion.Euler(0,-90,0),
+//   scale: new Vector3(8,4,1)
+// }))
+// ledWall.addComponent( new PlaneShape())
+// ledWall.addComponent(ledWallMat)
+
+//engine.addEntity(ledWall)
+
+let ledWallBG = new Entity()
+ledWallBG.addComponent(new Transform({
+  position: new Vector3(0,0,0),
+  rotation: Quaternion.Euler(0,0,0),
+  scale: new Vector3(1,1,1)
+}))
+ledWallBG.addComponent( screenBGShape)
+ledWallBG.setParent(ledWall)
+
+// let ledWall2 = new Entity()
+// ledWall2.addComponent(new Transform({
+//   position: new Vector3(scene.venueCenter.x + 13, scene.venueCenter.y + ledWallHeight, scene.venueCenter.z-7.8),
+//   rotation: Quaternion.Euler(0,-55,0),
+//   scale: new Vector3(8,4,1)
+// }))
+// ledWall2.addComponent( new PlaneShape())
+// ledWall2.addComponent(ledWallMat)
+
+engine.addEntity(ledWall2)
+
+let ledWall2BG = new Entity()
+ledWall2BG.addComponent(new Transform({
+  position: new Vector3(0,0,0),
+  rotation: Quaternion.Euler(0,0,0),
+  scale: new Vector3(1,1,1)
+}))
+ledWall2BG.addComponent( screenBGShape)
+ledWall2BG.setParent(ledWall2)
+
+// let ledWall3 = new Entity()
+// ledWall3.addComponent(new Transform({
+//   position: new Vector3(scene.venueCenter.x + 13, scene.venueCenter.y + ledWallHeight, scene.venueCenter.z+7.8),
+//   rotation: Quaternion.Euler(0,-125,0),
+//   scale: new Vector3(8,4,1)
+// }))
+// ledWall3.addComponent( new PlaneShape())
+// ledWall3.addComponent(ledWallMat)
+
+engine.addEntity(ledWall3)
+
+let ledWall3BG = new Entity()
+ledWall3BG.addComponent(new Transform({
+  position: new Vector3(0,0,0),
+  rotation: Quaternion.Euler(0,0,0),
+  scale: new Vector3(1,1,1)
+}))
+ledWall3BG.addComponent( screenBGShape)
+ledWall3BG.setParent(ledWall3)
 
 // const canvas = new UICanvas()
 
@@ -51,7 +170,7 @@ myVideoTexture.playing = true
 // uiInstruction.vTextAlign = 'center' 
 
 
-let projectorColumns = new Projector(new Vector3(scene.columnsCenter.x, scene.columnsCenter.y+ 3 ,scene.columnsCenter.z), new Vector3(4,4,1), Quaternion.Euler(0,0,0), false)
+let projectorColumns = new Projector(new Vector3(scene.columnsCenter.x, scene.columnsCenter.y+ 4 ,scene.columnsCenter.z), new Vector3(4,4,1), Quaternion.Euler(0,0,0), false)
 let projectorScatter = new Projector(new Vector3(scene.screensCenter.x, scene.screensCenter.y ,scene.screensCenter.z), new Vector3(8,4,1), Quaternion.Euler(0,0,0), true)
 
 
@@ -81,7 +200,7 @@ function addRandomScreens(_num:number){
       position: new Vector3(randPosX,randPosY,randPosZ),
       rotation: Quaternion.Euler(Math.random()*90-45,Math.random()*90-45, Math.random()*90-45),
       scale: new Vector3(randScaleX,randScaleY,1)},
-      true, uvMat2)
+      true, ledWallMat)
 
       ScreenGrpScatter.addSCreen(screen)
   }
@@ -387,7 +506,7 @@ class rotateTestSystem {
 
    for(let i = 0; i< columnsRight.length; i++){
      this.angleRight -= 4* dt
-     let radius = 2.2     
+     let radius = 1.8     
     let offset = 360/columnsRight.length *i
       
      let pos =  scene.venueCenter.add(Vector3.Backward().rotate(Quaternion.Euler(0,this.angleRight +offset ,0)).multiplyByFloats(radius,radius,radius))
@@ -396,7 +515,7 @@ class rotateTestSystem {
 
    for(let i = 0; i< columnsLeft.length; i++){
      this.angleLeft += 4* dt
-     let radius = 2.2     
+     let radius = 1.8     
     let offset = 360/columnsLeft.length *i
       
      let pos =  scene.venueCenter.add(Vector3.Backward().rotate(Quaternion.Euler(0,this.angleLeft +offset ,0)).multiplyByFloats(radius,radius,radius))
