@@ -71,32 +71,58 @@ export async function initiateVJUI() {
       100,
       20,
       () => {
-        sceneMessageBus.emit('action', { action: Action.GLASSBREAK })
+        sceneMessageBus.emit('action', {
+          action: Action.GLASSBREAK,
+          freeMode: freeMode,
+        })
       },
       ui.ButtonStyles.RED
     )
 
     let smokeOf = VJUI.addCheckbox('Smoke Off', 30, -80, () => {
-      sceneMessageBus.emit('action', { action: Action.SMOKESTOP })
+      sceneMessageBus.emit('action', {
+        action: Action.SMOKESTOP,
+        freeMode: freeMode,
+      })
       smokeMid.uncheck()
       smokeFull.uncheck()
     })
 
     let smokeMid = VJUI.addCheckbox('Smoke Mid', 30, -110, () => {
-      sceneMessageBus.emit('action', { action: Action.SMOKEONLYBOTTOM })
+      sceneMessageBus.emit('action', {
+        action: Action.SMOKEONLYBOTTOM,
+        freeMode: freeMode,
+      })
       smokeOf.uncheck()
       smokeFull.uncheck()
     })
 
     let smokeFull = VJUI.addCheckbox('Smoke FUll', 30, -140, () => {
-      sceneMessageBus.emit('action', { action: Action.SMOKE })
+      sceneMessageBus.emit('action', {
+        action: Action.SMOKE,
+        freeMode: freeMode,
+      })
       smokeMid.uncheck()
       smokeOf.uncheck()
     })
 
-    VJUI.addButton('DEFAULT SHOW', -130, -60, () => {
-      sceneMessageBus.emit('playshow', { show: 'default' })
-    })
+    VJUI.addSwitch(
+      'FREE MODE',
+      -160,
+      -60,
+      () => {
+        sceneMessageBus.emit('playshow', { show: 'free' })
+      },
+      () => {
+        sceneMessageBus.emit('playshow', { show: 'default' })
+      },
+      ui.SwitchStyles.SQUARERED,
+      true
+    )
+
+    // VJUI.addButton('DEFAULT SHOW', -130, -60, () => {
+    //   sceneMessageBus.emit('playshow', { show: 'default' })
+    // })
 
     // VJUI.addButton('FROM SERVER', -150, -70, () => {
     //   sceneMessageBus.emit('playshow', { show: 'server' })
@@ -106,9 +132,9 @@ export async function initiateVJUI() {
     //   sceneMessageBus.emit('playshow', { show: 2 })
     // })
 
-    VJUI.addButton('FREE MODE', -130, -130, () => {
-      sceneMessageBus.emit('playshow', { show: 'free' })
-    })
+    // VJUI.addButton('FREE MODE', -130, -130, () => {
+    //   sceneMessageBus.emit('playshow', { show: 'free' })
+    // })
 
     Input.instance.subscribe(
       'BUTTON_DOWN',
@@ -131,6 +157,9 @@ export async function initiateVJUI() {
   })
 
   sceneMessageBus.on('action', (e) => {
+    if (e.freeMode) {
+      setFreeMode()
+    }
     runAction(e.action)
   })
 

@@ -79,4 +79,4 @@ export let elf2 = new NPC(
 )
 
 // start default show
-//checkTime()
+checkTime()

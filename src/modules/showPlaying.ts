@@ -17,6 +17,7 @@ export function showPlayingTrue(show?: number) {
 }
 
 export function setFreeMode() {
+  if (freeMode) return
   freeMode = true
   showPlaying = 0
   if (RunEvents._instance) {
