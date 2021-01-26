@@ -2,7 +2,7 @@ import utils from '../../node_modules/decentraland-ecs-utils/index'
 
 export class Synced extends Entity {
   events: (() => void)[]
-  endPosition: TranformConstructorArgs
+  endPosition: TransformConstructorArgs
   public idleAnim: AnimationState
   public lastPlayedAnim: AnimationState
   public endAnimTimer: Entity
@@ -12,9 +12,9 @@ export class Synced extends Entity {
 
     startInvisible?: boolean,
     idleAnim?: string,
-    position?: TranformConstructorArgs,
+    position?: TransformConstructorArgs,
     events?: (() => void)[],
-    endPosition?: TranformConstructorArgs
+    endPosition?: TransformConstructorArgs
   ) {
     super()
     this.addComponent(model)
