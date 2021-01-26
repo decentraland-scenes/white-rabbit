@@ -70,14 +70,14 @@ export async function initiateVJUI() {
 
     let smokeOf = VJUI.addCheckbox('Smoke Off', 30, -80, () => {
       sceneMessageBus.emit('action', { action: Action.SMOKESTOP })
-      smokeMid.check()
-      smokeFull.check()
+      smokeMid.uncheck()
+      smokeFull.uncheck()
     })
 
     let smokeMid = VJUI.addCheckbox('Smoke Mid', 30, -110, () => {
       sceneMessageBus.emit('action', { action: Action.SMOKEONLYBOTTOM })
-      smokeOf.check()
-      smokeFull.check()
+      smokeOf.uncheck()
+      smokeFull.uncheck()
     })
 
     let smokeFull = VJUI.addCheckbox('Smoke FUll', 30, -140, () => {
