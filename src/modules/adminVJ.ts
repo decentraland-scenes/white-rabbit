@@ -3,6 +3,14 @@ import { getUserData, UserData } from '@decentraland/Identity'
 import { Action, runAction } from './eventScripts'
 import { isPreviewMode } from '@decentraland/EnvironmentAPI'
 import { shatterGlasses } from './animatedThings'
+import {
+  checkEventServer,
+  checkTime,
+  freeMode,
+  setFreeMode,
+  showPlayingFalse,
+  StartShow,
+} from './showPlaying'
 
 export let userData: UserData
 
@@ -60,8 +68,8 @@ export async function initiateVJUI() {
 
     VJUI.addButton(
       'Break Glass',
-      -120,
-      -80,
+      100,
+      20,
       () => {
         sceneMessageBus.emit('action', { action: Action.GLASSBREAK })
       },
@@ -86,7 +94,21 @@ export async function initiateVJUI() {
       smokeOf.uncheck()
     })
 
-    // VJUI.hide()
+    VJUI.addButton('DEFAULT SHOW', -130, -60, () => {
+      sceneMessageBus.emit('playshow', { show: 'default' })
+    })
+
+    // VJUI.addButton('FROM SERVER', -150, -70, () => {
+    //   sceneMessageBus.emit('playshow', { show: 'server' })
+    // })
+
+    // VJUI.addButton('SHOW 2', -150, -100, () => {
+    //   sceneMessageBus.emit('playshow', { show: 2 })
+    // })
+
+    VJUI.addButton('FREE MODE', -130, -130, () => {
+      sceneMessageBus.emit('playshow', { show: 'free' })
+    })
 
     Input.instance.subscribe(
       'BUTTON_DOWN',
@@ -110,6 +132,18 @@ export async function initiateVJUI() {
 
   sceneMessageBus.on('action', (e) => {
     runAction(e.action)
+  })
+
+  sceneMessageBus.on('playshow', (e) => {
+    if (e.show == 'default') {
+      checkTime()
+    } else if (e.show == 'free') {
+      setFreeMode()
+    } else if (e.show == 2) {
+      StartShow(2, Date.now())
+    } else if (e.show == 'server') {
+      checkEventServer()
+    }
   })
 }
 

@@ -5,6 +5,7 @@ import { movePlayerTo } from '@decentraland/RestrictedActions'
 import { initiateVJUI } from './modules/adminVJ'
 import { NPC } from '../node_modules/@dcl/npc-utils/index'
 import { elf1Intro } from './modules/dialog'
+import { checkTime } from './modules/showPlaying'
 
 let shroomShape = new GLTFShape('models/shroom_building.glb')
 
@@ -76,3 +77,6 @@ export let elf2 = new NPC(
     onlyETrigger: true,
   }
 )
+
+// start default show
+//checkTime()

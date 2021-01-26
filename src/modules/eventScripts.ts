@@ -1,5 +1,10 @@
 import utils from '../../node_modules/decentraland-ecs-utils/index'
-import { showPlayingFalse, showPlayingTrue } from './showPlaying'
+import {
+  checkTime,
+  showPlaying,
+  showPlayingFalse,
+  showPlayingTrue,
+} from './showPlaying'
 //import { bubbleScreenController, myVideoTexture } from './modules/video'
 import {
   bottomSwirl2Shape,
@@ -396,9 +401,27 @@ export function runAction(action: Action) {
 }
 
 export let ShowScripts: any = {
-  FREE: [],
+  DEFAULT: [
+    { time: 0, event: Action.SMOKESTOP },
+    { time: 5, event: Action.SMOKEONLYBOTTOM },
+    { time: 10, event: Action.SMOKE },
+    { time: 20, event: Action.SMOKESTOP },
+    { time: 20, event: Action.GLASSBREAK },
+    { time: 30, event: Action.SMOKEONLYBOTTOM },
+    { time: 50, event: Action.SMOKE },
+    { time: 60, event: Action.SMOKE },
+  ],
   RAC: [],
-  TEST: [],
+  TEST: [
+    { time: 0, event: Action.SMOKESTOP },
+    { time: 5, event: Action.SMOKEONLYBOTTOM },
+    { time: 10, event: Action.SMOKE },
+    { time: 20, event: Action.SMOKESTOP },
+    { time: 20, event: Action.GLASSBREAK },
+    { time: 30, event: Action.SMOKEONLYBOTTOM },
+    { time: 50, event: Action.SMOKE },
+    { time: 60, event: Action.SMOKE },
+  ],
 }
 
 type scheduledEvent = {
@@ -423,10 +446,15 @@ export class RunEvents {
       //log('coming parts ', this.eventScript)
 
       if (this.eventScript.length == 0) {
-        runAction(Action.STOPALL)
-        showPlayingFalse()
         log('Show over!')
         this.active = false
+
+        if (showPlaying == 1) {
+          checkTime()
+        } else {
+          runAction(Action.STOPALL)
+          showPlayingFalse()
+        }
         //engine.removeSystem(this)
       }
     }
@@ -435,7 +463,6 @@ export class RunEvents {
     RunEvents._instance = this
     this.eventScript = script
     this.currentTime = startTime ? startTime : 0
-    //myVideoTexture.play()
   }
 
   static createAndAddToEngine(script: show, startTime?: number): RunEvents {
@@ -450,5 +477,13 @@ export class RunEvents {
 
     log('starting show ', script)
     return this._instance
+  }
+
+  stopShow() {
+    this.eventScript = []
+    this.active = false
+    this.currentTime = 0
+    runAction(Action.STOPALL)
+    log('STOPPING SHOW!')
   }
 }

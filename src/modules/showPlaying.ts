@@ -2,6 +2,7 @@ import { RunEvents, ShowScripts } from './eventScripts'
 //import { Music } from './modules/music'
 
 export let showPlaying: number = 0
+export let freeMode: boolean = false
 
 export const sceneMessageBus = new MessageBus()
 
@@ -15,23 +16,50 @@ export function showPlayingTrue(show?: number) {
   showPlaying = show ? show : 1
 }
 
-export class CheckServer implements ISystem {
-  eventTimer: number
-  totalEventTimer: number
-  constructor(checkInterval: number) {
-    this.eventTimer = 0
-    this.totalEventTimer = checkInterval
+export function setFreeMode() {
+  freeMode = true
+  showPlaying = 0
+  if (RunEvents._instance) {
+    RunEvents._instance.stopShow()
   }
-  update(dt: number) {
-    if (showPlaying != 0) return
+}
 
-    this.eventTimer += dt
+// export class CheckServer implements ISystem {
+//   eventTimer: number
+//   totalEventTimer: number
+//   constructor(checkInterval: number) {
+//     this.eventTimer = 0
+//     this.totalEventTimer = checkInterval
+//   }
+//   update(dt: number) {
+//     if (showPlaying != 0 || freeMode) return
 
-    if (this.eventTimer > this.totalEventTimer) {
-      this.eventTimer = 0
+//     this.eventTimer += dt
 
-      checkEventServer()
-    }
+//     if (this.eventTimer > this.totalEventTimer) {
+//       this.eventTimer = 0
+//     }
+//   }
+// }
+
+//function to call the API
+export async function checkTime() {
+  let url = 'https://worldtimeapi.org/api/timezone/etc/gmt+3'
+
+  try {
+    let response = await fetch(url)
+    let json = await response.json()
+    let toDate = new Date(json.datetime)
+    log(toDate)
+
+    let seconds = toDate.getSeconds() * 1000
+    //let seconds = (toDate.getMinutes() * 60 + toDate.getSeconds() ) * 1000
+
+    StartShow(1, Date.now() - seconds)
+
+    //return seconds
+  } catch (e) {
+    log('error getting time data ', e)
   }
 }
 
@@ -89,15 +117,17 @@ export function StartShow(index: number, time: number) {
       return
       break
     case 1:
-      show = ShowScripts.LUCY
+      show = ShowScripts.DEFAULT.slice(0)
       break
     case 2:
-      show = ShowScripts.RAC
+      show = ShowScripts.RAC.slice(0)
       break
     case 3:
-      show = ShowScripts.TEST
+      show = ShowScripts.TEST.slice(0)
       break
   }
+
+  freeMode = false
 
   if (timeDiff >= show[show.length - 1].time) {
     log('show ended')
