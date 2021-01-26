@@ -1,18 +1,21 @@
 import { scene } from "./scene";
 import { spawnTables } from "./tables";
 import { changeTexture, kittyTexture, dclLogoTexture } from "./screenColumns";
+import { SmokeSwirl, startSmoke} from "./smoke";
+import { DotLightsController } from "./dotLights";
 
 
 
 let topSwirlShape = new GLTFShape("models/top_swirl.glb")
-let bottomSwirlShape = new GLTFShape("models/bottom_swirl.glb")
-let bottomSwirl2Shape = new GLTFShape("models/bottom_swirl2.glb")
 let glassShatterShape = new GLTFShape("models/glass_shattered.glb")
 let glassBasicShape = new GLTFShape("models/glass_basic.glb")
 let ceilingFanShape = new GLTFShape("models/ceiling_fan.glb")
 let ceilingFan2Shape = new GLTFShape("models/ceiling_fan2.glb")
-let dotLightShape = new GLTFShape("models/dot_lights.glb")
 
+
+// -- ADD MOVING DOTS EFFECT 
+let dotLightsControl = new DotLightsController()
+//dotLightsControl.addDotLights()
 
 
 
@@ -21,21 +24,6 @@ topSwirl.addComponent(new Transform({position: new Vector3(scene.venueCenter.x, 
 topSwirl.addComponent(topSwirlShape)
 engine.addEntity(topSwirl)
 
-let bottomSwirl = new Entity()
-bottomSwirl.addComponent(new Transform({
-    position: scene.venueCenter,
-    scale:new Vector3(1,1,1)
-    }))
-bottomSwirl.addComponent(bottomSwirlShape)
-engine.addEntity(bottomSwirl)
-
-let bottomSwirl2 = new Entity()
-bottomSwirl2.addComponent(new Transform({
-    position: scene.venueCenter,
-    scale:new Vector3(1,1,1)
-}))
-bottomSwirl2.addComponent(bottomSwirl2Shape)
-engine.addEntity(bottomSwirl2)
 
 let ceilingFan = new Entity()
 ceilingFan.addComponent(new Transform({
@@ -53,25 +41,9 @@ ceilingFan2.addComponent(new Transform({
 ceilingFan2.addComponent(ceilingFan2Shape)
 engine.addEntity(ceilingFan2)
 
-let dotLights:Entity[] = []
-
-function addDotLights(){
-    for (let i = 0; i < 16; i++){
-
-        let light = new Entity()
-        light.addComponent(new Transform({
-            position: scene.venueCenter,
-            rotation:    Quaternion.Euler(0,360/16*i,0)
-        }))
-        light.addComponent(dotLightShape)
-        engine.addEntity(light)
-
-        dotLights.push(light)
-    }
-}
 
 
-addDotLights()
+
 
 @Component("ShatterGlass")
 export class ShatterGlass{  
@@ -212,9 +184,20 @@ spawnTables()
 const input = Input.instance
 input.subscribe("BUTTON_DOWN", ActionButton.PRIMARY, true, e => {
 
-//uiInstruction.visible = false
+
 shatterGlasses()
 changeTexture(kittyTexture)
+startSmoke(true)
+
+dotLightsControl.show()
+})
+
+input.subscribe("BUTTON_DOWN", ActionButton.SECONDARY, true, e => {
+
+
+changeTexture(dclLogoTexture)
+startSmoke(false)
+dotLightsControl.hide()
 
   
 })
