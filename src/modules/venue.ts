@@ -3,6 +3,7 @@ import { spawnTables } from "./tables";
 import { changeTexture, kittyTexture, dclLogoTexture } from "./screenColumns";
 import { SmokeSwirl, startSmoke} from "./smoke";
 import { DotLightsController } from "./dotLights";
+import { LaserController } from "./lasers";
 
 
 
@@ -11,11 +12,14 @@ let glassShatterShape = new GLTFShape("models/glass_shattered.glb")
 let glassBasicShape = new GLTFShape("models/glass_basic.glb")
 let ceilingFanShape = new GLTFShape("models/ceiling_fan.glb")
 let ceilingFan2Shape = new GLTFShape("models/ceiling_fan2.glb")
+let centerFlashShape = new GLTFShape("models/center_flash.glb")
 
 
 // -- ADD MOVING DOTS EFFECT 
 let dotLightsControl = new DotLightsController()
-//dotLightsControl.addDotLights()
+
+// -- ADD LASER FAN EFFECT
+let laserControl = new LaserController()
 
 
 
@@ -40,6 +44,14 @@ ceilingFan2.addComponent(new Transform({
 }))
 ceilingFan2.addComponent(ceilingFan2Shape)
 engine.addEntity(ceilingFan2)
+
+let centerFlash = new Entity()
+centerFlash.addComponent(new Transform({
+    position: scene.venueCenter,
+    scale:new Vector3(1,1,1)
+}))
+centerFlash.addComponent(centerFlashShape)
+engine.addEntity(centerFlash)
 
 
 
@@ -190,6 +202,7 @@ changeTexture(kittyTexture)
 startSmoke(true)
 
 dotLightsControl.show()
+laserControl.show()
 })
 
 input.subscribe("BUTTON_DOWN", ActionButton.SECONDARY, true, e => {
@@ -198,6 +211,7 @@ input.subscribe("BUTTON_DOWN", ActionButton.SECONDARY, true, e => {
 changeTexture(dclLogoTexture)
 startSmoke(false)
 dotLightsControl.hide()
+laserControl.hide()
 
   
 })

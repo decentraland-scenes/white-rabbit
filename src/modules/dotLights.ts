@@ -1,8 +1,7 @@
 import { scene } from "./scene";
+import { ScalePulse } from "./simpleAnimators";
 
 let dotLightShape = new GLTFShape("models/dot_lights.glb")
-
-
 
 export class DotLightsController {
 
@@ -14,7 +13,7 @@ export class DotLightsController {
 
     constructor(){
         this.dotLights = []
-        this.dotLightCount = 16
+        this.dotLightCount = 16 
 
         this.dotLightsRoot = new Entity()
         this.dotLightsRoot.addComponent(new Transform({
@@ -32,9 +31,17 @@ export class DotLightsController {
                 let light = new Entity()
                 light.addComponent(new Transform({
                     position: new Vector3(0, 0, 0),
-                    rotation:    Quaternion.Euler(0,360/this.dotLightCount*i,0)
+                    rotation:    Quaternion.Euler(0,360/this.dotLightCount*i,0),
+                    scale: new Vector3(1,1,1)
                 }))
                 light.addComponent(dotLightShape).visible = false
+                light.addComponent(new ScalePulse(
+                    false,false,true,
+                    new Vector3(1,1,10),
+                    new Vector3(1,1,1),
+                    new Vector3(2,2,2)
+                    ))
+
                 //engine.addEntity(light)
                 light.setParent(this.dotLightsRoot)
                 this.dotLights.push(light)
@@ -64,23 +71,5 @@ export class DotLightsController {
     }
 
 }
-
-// export function addDotLights(){
-//     const dotLightCount = 16
-
-//     for (let i = 0; i < dotLightCount; i++){
-
-//         let light = new Entity()
-//         light.addComponent(new Transform({
-//             position: new Vector3(0, 0, 0),
-//             rotation:    Quaternion.Euler(0,360/dotLightCount*i,0)
-//         }))
-//         light.addComponent(dotLightShape)
-//         //engine.addEntity(light)
-//         light.setParent(dotLightsRoot)
-//         dotLights.push(light)
-//     }
-//     engine.addEntity(dotLightsRoot)
-// }
 
 

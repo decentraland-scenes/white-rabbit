@@ -30,24 +30,24 @@ uvMat.metallic = 0.1
 
 
 let screen1StretchUV = new PlaneUVData(
-  new Vector2(0.33, 0),
-  new Vector2(0, 0),
-  new Vector2(0, 1 ),
-  new Vector2(0.33, 1)
+  new Vector2(0.33, 0.33),
+  new Vector2(0, 0.33),
+  new Vector2(0, 0.66 ),
+  new Vector2(0.33, 0.66)
 )
 
 let screen2StretchUV = new PlaneUVData(
-  new Vector2(0.66, 0),
-  new Vector2(0.33, 0),
-  new Vector2(0.33, 1 ),
-  new Vector2(0.66, 1)
+  new Vector2(0.66, 0.33),
+  new Vector2(0.33, 0.33),
+  new Vector2(0.33, 0.66 ),
+  new Vector2(0.66, 0.66)
 )
 
 let screen3StretchUV = new PlaneUVData(
-  new Vector2(1, 0),
-  new Vector2(0.66, 0),
-  new Vector2(0.66, 1 ),
-  new Vector2(1, 1)
+  new Vector2(1, 0.33),
+  new Vector2(0.66, 0.33),
+  new Vector2(0.66, 0.66 ),
+  new Vector2(1, 0.66)
 )
 
 let ledWallMat = new Material()
@@ -72,106 +72,73 @@ myVideoTexture.playing = true
 
  const ledWallHeight = 2.9
 
-let ledWall = new Screen({
-  position: new Vector3(scene.venueCenter.x + 15.5, scene.venueCenter.y + ledWallHeight, scene.venueCenter.z),
-  rotation: Quaternion.Euler(0,-90,180),
-  scale: new Vector3(8,4,1)
-},
-false,
-ledWallMat,
-screen2StretchUV
-)
-
-let ledWall2 = new Screen({
-  position: new Vector3(scene.venueCenter.x + 13, scene.venueCenter.y + ledWallHeight, scene.venueCenter.z-7.8),
-  rotation: Quaternion.Euler(0,-55,180),
-  scale: new Vector3(8,4,1)
-},
-false,
-ledWallMat,
-screen3StretchUV
-)
-
-let ledWall3 = new Screen({
-  position: new Vector3(scene.venueCenter.x + 13, scene.venueCenter.y + ledWallHeight, scene.venueCenter.z+7.8),
-  rotation: Quaternion.Euler(0,-125,180),
-  scale: new Vector3(8,4,1)
-},
-false,
-ledWallMat,
-screen1StretchUV
-)
-// ledWall.addComponent(new Transform({
+// let ledWall = new Screen({
 //   position: new Vector3(scene.venueCenter.x + 15.5, scene.venueCenter.y + ledWallHeight, scene.venueCenter.z),
-//   rotation: Quaternion.Euler(0,-90,0),
+//   rotation: Quaternion.Euler(0,-90,180),
 //   scale: new Vector3(8,4,1)
-// }))
-// ledWall.addComponent( new PlaneShape())
-// ledWall.addComponent(ledWallMat)
+// },
+// false,
+// ledWallMat,
+// screen2StretchUV
+// )
 
-//engine.addEntity(ledWall)
-
-let ledWallBG = new Entity()
-ledWallBG.addComponent(new Transform({
-  position: new Vector3(0,0,0),
-  rotation: Quaternion.Euler(0,0,0),
-  scale: new Vector3(1,1,1)
-}))
-ledWallBG.addComponent( screenBGShape)
-ledWallBG.setParent(ledWall)
-
-// let ledWall2 = new Entity()
-// ledWall2.addComponent(new Transform({
+// let ledWall2 = new Screen({
 //   position: new Vector3(scene.venueCenter.x + 13, scene.venueCenter.y + ledWallHeight, scene.venueCenter.z-7.8),
-//   rotation: Quaternion.Euler(0,-55,0),
+//   rotation: Quaternion.Euler(0,-55,180),
 //   scale: new Vector3(8,4,1)
-// }))
-// ledWall2.addComponent( new PlaneShape())
-// ledWall2.addComponent(ledWallMat)
+// },
+// false,
+// ledWallMat,
+// screen3StretchUV
+// )
 
-engine.addEntity(ledWall2)
-
-let ledWall2BG = new Entity()
-ledWall2BG.addComponent(new Transform({
-  position: new Vector3(0,0,0),
-  rotation: Quaternion.Euler(0,0,0),
-  scale: new Vector3(1,1,1)
-}))
-ledWall2BG.addComponent( screenBGShape)
-ledWall2BG.setParent(ledWall2)
-
-// let ledWall3 = new Entity()
-// ledWall3.addComponent(new Transform({
+// let ledWall3 = new Screen({
 //   position: new Vector3(scene.venueCenter.x + 13, scene.venueCenter.y + ledWallHeight, scene.venueCenter.z+7.8),
-//   rotation: Quaternion.Euler(0,-125,0),
+//   rotation: Quaternion.Euler(0,-125,180),
 //   scale: new Vector3(8,4,1)
+// },
+// false,
+// ledWallMat,
+// screen1StretchUV
+// )
+
+// let ledWallBG = new Entity()
+// ledWallBG.addComponent(new Transform({
+//   position: new Vector3(0,0,0),
+//   rotation: Quaternion.Euler(0,0,0),
+//   scale: new Vector3(1,1,1)
 // }))
-// ledWall3.addComponent( new PlaneShape())
-// ledWall3.addComponent(ledWallMat)
+// ledWallBG.addComponent( screenBGShape)
+// ledWallBG.setParent(ledWall)
 
-engine.addEntity(ledWall3)
 
-let ledWall3BG = new Entity()
-ledWall3BG.addComponent(new Transform({
-  position: new Vector3(0,0,0),
-  rotation: Quaternion.Euler(0,0,0),
-  scale: new Vector3(1,1,1)
-}))
-ledWall3BG.addComponent( screenBGShape)
-ledWall3BG.setParent(ledWall3)
+// engine.addEntity(ledWall2)
 
-// const canvas = new UICanvas()
+// let ledWall2BG = new Entity()
+// ledWall2BG.addComponent(new Transform({
+//   position: new Vector3(0,0,0),
+//   rotation: Quaternion.Euler(0,0,0),
+//   scale: new Vector3(1,1,1)
+// }))
+// ledWall2BG.addComponent( screenBGShape)
+// ledWall2BG.setParent(ledWall2)
 
-// let uiInstruction = new UIText(canvas)
-// uiInstruction.value = 'Click to start video' 
-// uiInstruction.hAlign = 'center' 
-// uiInstruction.vAlign = 'center' 
-// uiInstruction.hTextAlign = 'center' 
-// uiInstruction.vTextAlign = 'center' 
+// engine.addEntity(ledWall3)
+
+// let ledWall3BG = new Entity()
+// ledWall3BG.addComponent(new Transform({
+//   position: new Vector3(0,0,0),
+//   rotation: Quaternion.Euler(0,0,0),
+//   scale: new Vector3(1,1,1)
+// }))
+// ledWall3BG.addComponent( screenBGShape)
+// ledWall3BG.setParent(ledWall3)
+
+
 
 
 let projectorColumns = new Projector(new Vector3(scene.columnsCenter.x, scene.columnsCenter.y+ 4 ,scene.columnsCenter.z), new Vector3(4,4,1), Quaternion.Euler(0,0,0), false)
-let projectorScatter = new Projector(new Vector3(scene.screensCenter.x, scene.screensCenter.y ,scene.screensCenter.z), new Vector3(8,4,1), Quaternion.Euler(0,0,0), true)
+let projectorScatter = new Projector(new Vector3(scene.venueCenter.x, scene.venueCenter.y + 3 ,scene.venueCenter.z), new Vector3(24,6,1), Quaternion.Euler(0,-90,0), true)
 
 
 let ScreenGrpColumns = new ScreenGroup(projectorColumns)
@@ -179,33 +146,63 @@ let ScreenGrpScatter = new ScreenGroup(projectorScatter)
 
 
 
-function addRandomScreens(_num:number){
-  let randScaleX = 8
-  let randScaleY = 4.5
+function addScatterScreens(_rows:number, _columns:number, radius:number, center:Vector3){
 
-  let randPosX = 8
-  let randPosY = 1
-  let randPosZ = 1
+  let pos = new Vector3(0,0,1)
+  let screenHeight = 1.5
+  let screenWidth = 3.8
+  let heightStep = screenHeight*1.1
+  let angleRange = 75
+  let centerAngle = -90
 
-  for (let i=0; i<_num; i++){
-    randScaleX = 1 + Math.random()*3
-    randScaleY = 1 + Math.random()*1.5
+  let heightBase = 0.735 + screenHeight/2
+  let height = 0
+  let angleStep = angleRange/(_columns-1)
+  let angle = centerAngle - angleStep * (_columns/2) + angleStep/2
+  
+  let currentAngle = -125
 
-    randPosX = scene.screensCenter.x + Math.random()*6 -3
-    randPosY = scene.screensCenter.y+ Math.random()*4-2
-    randPosZ = scene.screensCenter.z + Math.random()*6-3    
 
+  for (let i=0; i< _rows; i++){
 
-    let screen = new Screen({
-      position: new Vector3(randPosX,randPosY,randPosZ),
-      rotation: Quaternion.Euler(Math.random()*90-45,Math.random()*90-45, Math.random()*90-45),
-      scale: new Vector3(randScaleX,randScaleY,1)},
-      true, ledWallMat)
+    height = heightBase + i*heightStep 
 
-      ScreenGrpScatter.addSCreen(screen)
+    for(let j=0; j< _columns - i%2; j++){
+
+      currentAngle = angle + j*angleStep      
+
+      if(i%2 == 1){
+        currentAngle = angle + j*angleStep + angleStep/2
+      }
+      let offset = Math.random()*0.75
+
+      pos = center.add(Vector3.Backward().rotate(Quaternion.Euler(0,currentAngle,0) ).multiplyByFloats(radius - offset ,radius - offset,radius - offset) )
+
+      let screen = new Screen({
+        position: new Vector3(pos.x, center.y + height, pos.z),
+        rotation: Quaternion.Euler(0,currentAngle + Math.random()*10 -5, 1),
+        scale: new Vector3(screenWidth - Math.random()*0.1, screenHeight - Math.random()*0.1, 1)},
+        true, 
+        ledWallMat)
+
+        ScreenGrpScatter.addSCreen(screen)
+
+      let ledWallBG = new Entity()
+      ledWallBG.addComponent(new Transform({
+        position: new Vector3(0,0,0),
+        rotation: Quaternion.Euler(0,0,0),
+        scale: new Vector3(1,1,1)
+      }))
+      ledWallBG.addComponent( screenBGShape)
+      ledWallBG.setParent(screen)
+    }
   }
+
+
 }
 
+addScatterScreens(3,6, 16, scene.venueCenter)
+ScreenGrpScatter.updateScreens(projectorScatter.getComponent(Transform).position)
 
 class ColumnScreen {
   screens:Screen[] = []  
@@ -474,7 +471,7 @@ function addColumnCircle(count:number, center:Vector3, radius:number){
     
   // }
 }
-addColumnCircle(10, scene.venueCenter,3)
+addColumnCircle(10, scene.venueCenter, 8)
 //addColumnGrid(3,3, scene.columnsCenter)
 //addRandomScreens(8)
 //let cube1 = new CubeScreen(ScreenGrp1,  new Vector3(scene.center.x - 10, 5, scene.center.z - 10), cubeScale)
@@ -495,10 +492,10 @@ class rotateTestSystem {
    //projectorTransfrom.position = player.position
    //projectorTransfrom.rotation = player.rotation
     projectorColumnsTransfrom.lookAt(player.position)
-    projectorScatterTransfrom.lookAt(player.position)
+    //projectorScatterTransfrom.lookAt(projectorScatterTransfrom.position)
 
    ScreenGrpColumns.updateScreens(player.position)
-   ScreenGrpScatter.updateScreens(player.position)
+  
 
    
    //ScreenGroupFloor.updateScreens(player.position)
@@ -519,7 +516,7 @@ class rotateTestSystem {
     let offset = 360/columnsLeft.length *i
       
      let pos =  scene.venueCenter.add(Vector3.Backward().rotate(Quaternion.Euler(0,this.angleLeft +offset ,0)).multiplyByFloats(radius,radius,radius))
-     columnsLeft[i].updateColumn(pos, Quaternion.Euler(0, 180 + this.angleLeft + offset, -30),1.2, columnHeight, uvMat )
+     columnsLeft[i].updateColumn(pos, Quaternion.Euler(0, 180 + this.angleLeft + offset, -30), 1.2, columnHeight, uvMat )
    }
  
   }
