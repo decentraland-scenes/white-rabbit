@@ -67,14 +67,15 @@ export class SwayRotator{
    speed:number = 2
    freq:number = 2
    amp:number = 20
-   startRot:number = 0
-   axis:Vector3 = Vector3.Forward()
+   startRot:Quaternion
+   endRot:Quaternion
+   fraction
 
-   constructor(_axis:Vector3, _amp:number, _freq:number, _startRot:number){
-        this.axis = _axis
-        this.amp = _amp
+   constructor( _freq:number, _startRot:Quaternion, _endRot:Quaternion){  
+        
         this.freq = _freq
         this.startRot = _startRot
+        this.endRot = _endRot
    }
      
     setActive(_active:boolean){
@@ -100,10 +101,10 @@ class SimpleAnimatorSystem {
             const transform = entity.getComponent(Transform)
 
             if(info.x) {
-                transform.scale.x = info.xBase + Math.sin(this.elapsedTime * info.xFreq)* info.xAmp
+                transform.scale.x = info.xBase + Math.sin(this.elapsedTime * info.xFreq)* info.xAmp 
             }
             if(info.y) {
-                transform.scale.y = info.yBase + Math.sin(this.elapsedTime * info.yFreq)* info.yAmp
+                transform.scale.y = info.yBase +  Math.sin(this.elapsedTime * info.yFreq)* info.yAmp   
             }
             if(info.z) {
                 transform.scale.z = info.zBase + Math.sin(this.elapsedTime * info.zFreq)* info.zAmp
@@ -123,8 +124,10 @@ class SimpleAnimatorSystem {
             const info = entity.getComponent(SwayRotator)
             const transform = entity.getComponent(Transform)
 
-          //  transform.rotation
-           // transform.rotation = Quaternion.RotationAxis(info.axis, dt * Math.sin(this.elapsedTime * info.freq) * info.amp)
+            
+           info.fraction = (Math.sin(this.elapsedTime * info.freq) + 1) *0.5
+
+            transform.rotation = Quaternion.Slerp(info.startRot, info.endRot, info.fraction)
             
         }
 

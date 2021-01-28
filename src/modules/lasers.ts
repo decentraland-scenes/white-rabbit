@@ -16,35 +16,59 @@ export class LaserController {
         this.laserRotateRoot.addComponent(new Transform({
             position: new Vector3( scene.venueCenter.x, scene.venueCenter.y, scene.venueCenter.z)
         }))
-        this.laserRotateRoot.addComponent( new YRotator(10))
+        this.laserRotateRoot.addComponent( new YRotator(30))
         engine.addEntity(this.laserRotateRoot)
 
         this.addLasers()
     }
 
     addLasers(){
-        for (let i = 0; i < 16; i++){    
+        for (let i = 0; i < 16; i++){
             
             let laserCone1 = new Entity()
-            laserCone1.addComponent(new Transform({
-                position: new Vector3(0, i%2*8, 0),
-                rotation:    Quaternion.Euler(0, 360/16*i + 360/32 ,0),
-                scale:new Vector3(0.8, 1, 1)
-            }))
-            laserCone1.addComponent(laserConeShape)
-            laserCone1.addComponent(new SwayRotator(
-                Vector3.Forward(),
-                70,
-                10,
-                0
 
-            ))
-            laserCone1.addComponent(new ScalePulse(
-                false, false, true,
-                new Vector3(1,1,1),
-                new Vector3(0.8,1,1),
-                new Vector3(5,5,5)
+            // bottom lasers
+            if(i%2 == 0){
+                laserCone1.addComponent(new Transform({
+                    position: new Vector3(0, 0, 0),
+                    rotation:    Quaternion.Euler(0, 360/16*i + 360/32 ,0),
+                    scale:new Vector3(0.8, 1, 1)
+                }))                
+                laserCone1.addComponent(new SwayRotator(                
+                    2,
+                    Quaternion.Euler(0, 360/16*i + 360/32 ,0),
+                    Quaternion.Euler(0, 360/16*i + 360/32 ,-45)
+    
                 ))
+                laserCone1.addComponent(new ScalePulse(
+                    false, false, true,
+                    new Vector3(0.5,0.5,0.5),
+                    new Vector3(0.8,0,0),
+                    new Vector3(1,1,1)
+                    ))  
+            }
+            else{
+                laserCone1.addComponent(new Transform({
+                    position: new Vector3(0, 8, 0),
+                    rotation:    Quaternion.Euler(0, 360/16*i + 360/32 ,0),
+                    scale:new Vector3(0.8, 1, 1)
+                }))                
+                laserCone1.addComponent(new SwayRotator(                
+                    2,
+                    Quaternion.Euler(0, 360/16*i + 360/32 ,0),
+                    Quaternion.Euler(0, 360/16*i + 360/32 ,45)
+    
+                ))
+                laserCone1.addComponent(new ScalePulse(
+                    false, false, true,
+                    new Vector3(1,1,1),
+                    new Vector3(0.8,1,1),
+                    new Vector3(1,1,1)
+                    ))  
+            }            
+            
+            
+            laserCone1.addComponent(laserConeShape)
             //engine.addEntity(laserCone1)
     
             laserCone1.setParent(this.laserRotateRoot)
