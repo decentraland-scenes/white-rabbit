@@ -61,9 +61,12 @@
     "voiceEnabled": true,
     "blacklist": []
   },
-  "requiredPermissions": [],
+  "requiredPermissions": [
+    "ALLOW_TO_MOVE_PLAYER_INSIDE_SCENE"
+  ],
   "main": "bin/game.js",
   "tags": [],
+  
   "spawnPoints": [
     {
       "name": "spawn1",
