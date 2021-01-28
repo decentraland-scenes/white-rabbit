@@ -12,7 +12,7 @@ let ledMaskTexture = new Texture('textures/led_wall_mask.png', {samplingMode:2})
 //let aoShape =  new GLTFShape('models/ao_column.glb')
 
 const myVideoClip1 = new VideoClip(
-  'textures/test.mp4'
+  'textures/cc_video.mp4'
 )
 const myVideoTexture = new VideoTexture(myVideoClip1)
 

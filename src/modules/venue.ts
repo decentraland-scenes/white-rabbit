@@ -12,7 +12,7 @@ let glassShatterShape = new GLTFShape("models/glass_shattered.glb")
 let glassBasicShape = new GLTFShape("models/glass_basic.glb")
 let ceilingFanShape = new GLTFShape("models/ceiling_fan.glb")
 let ceilingFan2Shape = new GLTFShape("models/ceiling_fan2.glb")
-let centerFlashShape = new GLTFShape("models/center_flash.glb")
+
 
 
 // -- ADD MOVING DOTS EFFECT 
@@ -45,13 +45,7 @@ ceilingFan2.addComponent(new Transform({
 ceilingFan2.addComponent(ceilingFan2Shape)
 engine.addEntity(ceilingFan2)
 
-let centerFlash = new Entity()
-centerFlash.addComponent(new Transform({
-    position: scene.venueCenter,
-    scale:new Vector3(1,1,1)
-}))
-centerFlash.addComponent(centerFlashShape)
-engine.addEntity(centerFlash)
+
 
 
 
