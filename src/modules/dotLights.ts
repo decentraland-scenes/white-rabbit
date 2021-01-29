@@ -3,6 +3,7 @@ import { ScalePulse } from "./simpleAnimators";
 
 let dotLightShape = new GLTFShape("models/dot_lights.glb")
 
+
 export class DotLightsController {
 
     isActive:boolean = false
@@ -48,6 +49,8 @@ export class DotLightsController {
             }
             engine.addEntity(this.dotLightsRoot)
             this.isAdded = true
+
+            
         }
         
     }

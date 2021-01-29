@@ -4,14 +4,14 @@ import { changeTexture, kittyTexture, dclLogoTexture } from "./screenColumns";
 import { SmokeSwirl, startSmoke} from "./smoke";
 import { DotLightsController } from "./dotLights";
 import { LaserController } from "./lasers";
+import { SpiralController } from "./spirals";
 
 
 
-let topSwirlShape = new GLTFShape("models/top_swirl.glb")
+
 let glassShatterShape = new GLTFShape("models/glass_shattered.glb")
 let glassBasicShape = new GLTFShape("models/glass_basic.glb")
-let ceilingFanShape = new GLTFShape("models/ceiling_fan.glb")
-let ceilingFan2Shape = new GLTFShape("models/ceiling_fan2.glb")
+
 
 
 
@@ -21,29 +21,11 @@ let dotLightsControl = new DotLightsController()
 // -- ADD LASER FAN EFFECT
 let laserControl = new LaserController()
 
+// -- ADD SPIRAL CEILING EFFECT
+let spiralControl = new SpiralController()
 
 
-let topSwirl = new Entity()
-topSwirl.addComponent(new Transform({position: new Vector3(scene.venueCenter.x, scene.venueCenter.y+6.9, scene.venueCenter.z) }))
-topSwirl.addComponent(topSwirlShape)
-engine.addEntity(topSwirl)
 
-
-let ceilingFan = new Entity()
-ceilingFan.addComponent(new Transform({
-    position: scene.venueCenter,
-    scale:new Vector3(1,1,1)
-}))
-ceilingFan.addComponent(ceilingFanShape)
-engine.addEntity(ceilingFan)
-
-let ceilingFan2 = new Entity()
-ceilingFan2.addComponent(new Transform({
-    position: scene.venueCenter,
-    scale:new Vector3(1,1,1)
-}))
-ceilingFan2.addComponent(ceilingFan2Shape)
-engine.addEntity(ceilingFan2)
 
 
 
@@ -192,20 +174,23 @@ input.subscribe("BUTTON_DOWN", ActionButton.PRIMARY, true, e => {
 
 
 shatterGlasses()
-changeTexture(kittyTexture)
+//changeTexture(kittyTexture)
 startSmoke(true)
 
 dotLightsControl.show()
 laserControl.show()
+spiralControl.showFirst()
+
 })
 
 input.subscribe("BUTTON_DOWN", ActionButton.SECONDARY, true, e => {
 
 
-changeTexture(dclLogoTexture)
+//changeTexture(dclLogoTexture)
 startSmoke(false)
 dotLightsControl.hide()
 laserControl.hide()
+spiralControl.hideAll()
 
   
 })

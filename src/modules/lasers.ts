@@ -23,14 +23,18 @@ export class LaserController {
     }
 
     addLasers(){
+
+        let baseRadius = 2
+        
         for (let i = 0; i < 16; i++){
             
             let laserCone1 = new Entity()
+            
 
             // bottom lasers
             if(i%2 == 0){
                 laserCone1.addComponent(new Transform({
-                    position: new Vector3(0, 0, 0),
+                    position: Vector3.Left().rotate(Quaternion.Euler(0, 360/16*i + 360/32 ,0)).multiplyByFloats(baseRadius,baseRadius,baseRadius),
                     rotation:    Quaternion.Euler(0, 360/16*i + 360/32 ,0),
                     scale:new Vector3(0.8, 1, 1)
                 }))                
@@ -47,28 +51,30 @@ export class LaserController {
                     new Vector3(1,1,1)
                     ))  
             }
+            // top lasers
             else{
+                let pos = Vector3.Left().rotate(Quaternion.Euler(0, 360/16*i + 360/32 ,0)).multiplyByFloats(baseRadius,baseRadius,baseRadius)
                 laserCone1.addComponent(new Transform({
-                    position: new Vector3(0, 8, 0),
+                    position: pos.add(new Vector3(0,8,0)),
                     rotation:    Quaternion.Euler(0, 360/16*i + 360/32 ,0),
                     scale:new Vector3(0.8, 1, 1)
                 }))                
                 laserCone1.addComponent(new SwayRotator(                
                     2,
-                    Quaternion.Euler(0, 360/16*i + 360/32 ,0),
+                    Quaternion.Euler(0, 360/16*i + 360/32 ,10),
                     Quaternion.Euler(0, 360/16*i + 360/32 ,45)
     
                 ))
                 laserCone1.addComponent(new ScalePulse(
                     false, false, true,
-                    new Vector3(1,1,1),
-                    new Vector3(0.8,1,1),
+                    new Vector3(0.5,0.5,0.5),
+                    new Vector3(0.8,0,0),
                     new Vector3(1,1,1)
                     ))  
             }            
             
             
-            laserCone1.addComponent(laserConeShape)
+            laserCone1.addComponent(laserConeShape).visible = false
             //engine.addEntity(laserCone1)
     
             laserCone1.setParent(this.laserRotateRoot)

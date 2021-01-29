@@ -3,7 +3,8 @@ import { scene } from "./scene";
 
 let bottomSwirlShape = new GLTFShape("models/bottom_swirl.glb")
 let bottomSwirl2Shape = new GLTFShape("models/bottom_swirl2.glb")
-
+let ceilingFanShape = new GLTFShape("models/ceiling_fan.glb")
+let ceilingFan2Shape = new GLTFShape("models/ceiling_fan2.glb")
 
 @Component("SmokeSwirl")
 export class SmokeSwirl{  
@@ -16,6 +17,26 @@ export class SmokeSwirl{
     }
 
 }
+
+
+let ceilingFan = new Entity()
+ceilingFan.addComponent(new Transform({
+    position: scene.venueCenter,
+    scale:new Vector3(1,1,1)
+}))
+ceilingFan.addComponent(ceilingFanShape)
+engine.addEntity(ceilingFan)
+
+let ceilingFan2 = new Entity()
+ceilingFan2.addComponent(new Transform({
+    position: scene.venueCenter,
+    scale:new Vector3(1,1,1)
+}))
+ceilingFan2.addComponent(ceilingFan2Shape)
+engine.addEntity(ceilingFan2)
+
+
+
 
 let bottomSwirl = new Entity()
 bottomSwirl.addComponent(new Transform({
