@@ -9,6 +9,8 @@ import { checkTime } from './modules/showPlaying'
 
 let shroomShape = new GLTFShape('models/shroom_building.glb')
 
+import * as ui from '../node_modules/@dcl/ui-utils/index'
+
 let shroomBuilding = new Entity()
 shroomBuilding.addComponent(new Transform({ position: scene.center }))
 shroomBuilding.addComponent(shroomShape)

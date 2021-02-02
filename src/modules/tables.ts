@@ -6,7 +6,7 @@ let chairShape = new GLTFShape("models/chair.glb")
 
 export function spawnTables(){
 
-    let chairRadius = 1
+    let chairRadius = 1.2
 
     for(let i=0; i< scene.tablePositions.length; i++){
 
@@ -28,12 +28,12 @@ export function spawnTables(){
             //chair.addComponent(new Billboard(false,true, false))
             engine.addEntity(chair)
 
-            let chairReflect1 = new Entity()
-            chairReflect1.addComponent(new Transform({position: rootPos.add(Vector3.Forward().rotate(Quaternion.Euler(0,120*j,0)))}))
-            //chairReflect1.getComponent(Transform).position.y -= 10
-            chairReflect1.addComponent(chairReflectShape)
-          //  chairReflect1.addComponent(new Billboard(false,true, false))
-            engine.addEntity(chairReflect1)
+        //     let chairReflect1 = new Entity()
+        //     chairReflect1.addComponent(new Transform({position: rootPos.add(Vector3.Forward().rotate(Quaternion.Euler(0,120*j,0)))}))
+        //     //chairReflect1.getComponent(Transform).position.y -= 10
+        //     chairReflect1.addComponent(chairReflectShape)
+        //   //  chairReflect1.addComponent(new Billboard(false,true, false))
+        //     engine.addEntity(chairReflect1)
         }
         
     }
