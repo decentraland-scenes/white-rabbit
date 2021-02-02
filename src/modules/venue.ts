@@ -5,12 +5,15 @@ import { SmokeSwirl, startSmoke} from "./smoke";
 import { DotLightsController } from "./dotLights";
 import { LaserController } from "./lasers";
 import { SpiralController } from "./spirals";
+import { tvScreenController } from "./screenColumns";
 
 
 
 
 let glassShatterShape = new GLTFShape("models/glass_shattered.glb")
 let glassBasicShape = new GLTFShape("models/glass_basic.glb")
+let bottlesBottomShape = new GLTFShape("models/bottles_bottom.glb")
+let bottlesTopShape = new GLTFShape("models/bottles_top.glb")
 
 
 
@@ -27,7 +30,21 @@ let spiralControl = new SpiralController()
 
 
 
+// ADD bar bottles
 
+let bottlesTop = new Entity()
+bottlesTop.addComponent(new Transform({
+    position: new Vector3(scene.center.x, scene.center.y, scene.center.z)
+}))
+bottlesTop.addComponent(bottlesTopShape)
+engine.addEntity(bottlesTop)
+
+let bottlesBottom = new Entity()
+bottlesBottom.addComponent(new Transform({
+    position: new Vector3(scene.center.x, scene.center.y, scene.center.z)
+}))
+bottlesBottom.addComponent(bottlesBottomShape)
+engine.addEntity(bottlesBottom)
 
 
 
@@ -180,6 +197,7 @@ startSmoke(true)
 dotLightsControl.show()
 laserControl.show()
 spiralControl.showFirst()
+tvScreenController.stretchVideoAcross()
 
 })
 
@@ -191,6 +209,7 @@ startSmoke(false)
 dotLightsControl.hide()
 laserControl.hide()
 spiralControl.hideAll()
+tvScreenController.splitVideoToEach()
 
   
 })

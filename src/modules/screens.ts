@@ -17,6 +17,13 @@ export class PlaneUVData {
 
 }
 
+const defaultVideoUV:PlaneUVData = new PlaneUVData(
+  new Vector2(0,1),
+  new Vector2(1,1),
+  new Vector2(1,0),
+  new Vector2(0,0)
+)
+
 
 export class Screen extends Entity {
 
@@ -273,6 +280,17 @@ export class Screen extends Entity {
         
         
         
+      }
+    }
+
+    resetAllScreens(){
+      for(let i=0; i< this.screens.length; i++){
+        this.screens[i].setUVs(
+          defaultVideoUV.uv00,
+          defaultVideoUV.uv10,
+          defaultVideoUV.uv11,
+          defaultVideoUV.uv01
+          )        
       }
     }
   }

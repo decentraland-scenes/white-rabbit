@@ -41,7 +41,7 @@ export class LaserController {
                 laserCone1.addComponent(new SwayRotator(                
                     2,
                     Quaternion.Euler(0, 360/16*i + 360/32 ,0),
-                    Quaternion.Euler(0, 360/16*i + 360/32 ,-45)
+                    Quaternion.Euler(0, 360/16*i + 360/32 ,-30)
     
                 ))
                 laserCone1.addComponent(new ScalePulse(
