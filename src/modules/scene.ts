@@ -20,13 +20,13 @@ export class Scene {
         let radius = []
 
         radius.push(8 + 1)
-        radius.push(8 + 5)
-        radius.push(8 + 3.5)
-        radius.push(8 + 1.5)
+        radius.push(8 + 4)
+        radius.push(8 + 2.5)
+        radius.push(8 + 0.5)
+        radius.push(8 + 1)
+        radius.push(8 + 3.6)
+        radius.push(8 + 1.4)
         radius.push(8 + 2)
-        radius.push(8 + 4.6)
-        radius.push(8 + 2.4)
-        radius.push(8 + 3)
        
 
         for(let i=0; i< radius.length; i++){

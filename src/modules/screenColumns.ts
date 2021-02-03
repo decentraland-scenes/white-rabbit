@@ -159,7 +159,7 @@ let ScreenGrpScatter = new ScreenGroup(projectorScatter)
 function addTVScreens(_rows:number, _columns:number, radius:number, center:Vector3){
 
   let pos = new Vector3(0,0,1)
-  let screenHeight = 1.5
+  let screenHeight = 1.3
   let screenWidth = 3.8
   let heightStep = screenHeight*1.1
   let angleRange = 75

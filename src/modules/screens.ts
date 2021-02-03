@@ -30,7 +30,7 @@ export class Screen extends Entity {
   screenMesh:Entity
   screenPlane:PlaneShape    
   isTwoSided:boolean = true
-  isCollider:boolean = false
+  isCollider:boolean = true
   
   corner00:Vector3 
   corner10:Vector3 

@@ -16,6 +16,9 @@ let bottlesBottomShape = new GLTFShape("models/bottles_bottom.glb")
 let bottlesTopShape = new GLTFShape("models/bottles_top.glb")
 
 
+let poleShape = new GLTFShape("models/pole.glb")
+
+
 
 
 // -- ADD MOVING DOTS EFFECT 
@@ -27,6 +30,22 @@ let laserControl = new LaserController()
 // -- ADD SPIRAL CEILING EFFECT
 let spiralControl = new SpiralController()
 
+
+// ADD dance poles
+
+let pole1 = new Entity()
+pole1.addComponent(new Transform({
+    position: new Vector3(scene.venueCenter.x-6.5, scene.venueCenter.y+0.7, scene.venueCenter.z+13.5)
+}))
+pole1.addComponent(poleShape)
+engine.addEntity(pole1)
+
+let pole2 = new Entity()
+pole2.addComponent(new Transform({
+    position: new Vector3(scene.venueCenter.x-6.5, scene.venueCenter.y+0.7, scene.venueCenter.z-13.5)
+}))
+pole2.addComponent(poleShape)
+engine.addEntity(pole2)
 
 
 
@@ -196,7 +215,7 @@ startSmoke(true)
 
 dotLightsControl.show()
 laserControl.show()
-spiralControl.showFirst()
+spiralControl.showAll()
 tvScreenController.stretchVideoAcross()
 
 })
