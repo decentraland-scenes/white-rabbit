@@ -1,6 +1,6 @@
 import { scene } from "./scene"
 import { movePlayerTo } from '@decentraland/RestrictedActions'
-import { TriggerBox } from "./triggerBox"
+import { TriggerBox } from "./utilities/triggerBox"
 import { player } from "./player"
 
 
