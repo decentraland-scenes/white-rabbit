@@ -25,8 +25,8 @@ let screenBGShape = new GLTFShape("models/screen_bg.glb")
 let uvMat = new Material()
 uvMat.albedoTexture = myVideoTexture
 uvMat.emissiveTexture = myVideoTexture
-//uvMat.alphaTexture = ledMaskTexture
-uvMat.transparencyMode = 2
+//uvMat.alphaTexture = circleAlphaTexture
+//uvMat.transparencyMode = 2
 uvMat.emissiveColor = Color3.Gray()
 uvMat.roughness = 0.0
 uvMat.specularIntensity = 1
@@ -141,7 +141,7 @@ myVideoTexture.playing = true
 
 
 
-let projectorColumns = new Projector(new Vector3(scene.columnsCenter.x, scene.columnsCenter.y+ 4.5 ,scene.columnsCenter.z), new Vector3(8,4,1), Quaternion.Euler(0,0,0), false)
+let projectorColumns = new Projector(new Vector3(scene.columnsCenter.x, scene.columnsCenter.y+ 4.1 ,scene.columnsCenter.z), new Vector3(4,8,1), Quaternion.Euler(0,0,0), true)
 let projectorScatter = new Projector(new Vector3(scene.venueCenter.x, scene.venueCenter.y + 3 ,scene.venueCenter.z), new Vector3(24,6,1), Quaternion.Euler(0,-90,0), true)
 
 // projectorColumns.addComponent(new ScalePulse(
@@ -159,7 +159,7 @@ let ScreenGrpScatter = new ScreenGroup(projectorScatter)
 function addTVScreens(_rows:number, _columns:number, radius:number, center:Vector3){
 
   let pos = new Vector3(0,0,1)
-  let screenHeight = 1.5
+  let screenHeight = 1.3
   let screenWidth = 3.8
   let heightStep = screenHeight*1.1
   let angleRange = 75
@@ -212,6 +212,8 @@ function addTVScreens(_rows:number, _columns:number, radius:number, center:Vecto
 }
 
 addTVScreens(3,6, 16, scene.venueCenter)
+
+
 ScreenGrpScatter.updateScreens(projectorScatter.getComponent(Transform).position)
 
 
@@ -401,9 +403,12 @@ class ColumnScreen {
   
     }
 
+
+ 
+    
 const columnScale = 0.75
 const columnBaseHeight = 0
-const columnHeight = 8
+const columnHeight = 9
 const columnSpacing = 2
 
 const cubeScale = 3
@@ -416,35 +421,68 @@ function addColumnCircle(count:number, center:Vector3, radius:number){
 
   for(let i=0; i < count; i++){
 
-    if (i != 10 && i != 11 && i != 12){
-      let angle = 360/count *i + (360/count)*0.5 
+    
+      let angle = 360/count *i + (360/count)*1
 
       let side = 2*radius * Math.tan(ToRadian(180/count))         
           
-      let pos =  scene.venueCenter.add(Vector3.Backward().rotate(Quaternion.Euler(0,angle ,0)).multiplyByFloats(radius,radius,radius))
-  
+      let pos =  center.add(Vector3.Backward().rotate(Quaternion.Euler(0,angle,0)).multiplyByFloats(radius,radius,radius))
+
+      let currentHeight = columnHeight
+      
+      if (i == 10 || i == 11 || i == 12){
+        currentHeight = 6
+        pos.y += 2.5
+      }
+
       let column = new ColumnScreen(
         ScreenGrpColumns,  
-        center.add(Vector3.Backward().rotate(Quaternion.Euler(0,angle,0)).multiplyByFloats(radius,radius,radius)), 
+        pos, 
         Quaternion.Euler(0,angle,0),
         side, 
-        columnHeight,
+        currentHeight,
         true,
         uvMat)    
+
+       
        
   
         columnsRight.push(column)
-    }
+    
     
    
   }
 
 }
-addColumnCircle(16, scene.venueCenter, 0.75)
+addColumnCircle(16, scene.venueCenter, 1.2)
 //addColumnGrid(3,3, scene.columnsCenter)
 //addRandomScreens(8)
 //let cube1 = new CubeScreen(ScreenGrp1,  new Vector3(scene.center.x - 10, 5, scene.center.z - 10), cubeScale)
 
+export class TVScreenController {
+
+  screenGroup:ScreenGroup
+  projectorRef:Projector 
+
+  constructor(_screenGrp:ScreenGroup, _projector:Projector){
+    this.screenGroup = _screenGrp
+    this.projectorRef = _projector
+  }
+
+  stretchVideoAcross(){
+    this.screenGroup.updateScreens(this.projectorRef.getComponent(Transform).position)
+  }
+
+  splitVideoToEach(){
+    ScreenGrpScatter.resetAllScreens()
+  }
+
+}
+
+export let tvScreenController = new TVScreenController(
+  ScreenGrpScatter,
+  projectorScatter
+)
 
 class rotateTestSystem {
 
@@ -459,13 +497,15 @@ class rotateTestSystem {
     const projectorColumnsTransfrom = projectorColumns.getComponent(Transform)
     const projectorScatterTransfrom = projectorScatter.getComponent(Transform)
 
-    projectorColumnsTransfrom.lookAt( new Vector3(player.position.x, projectorColumnsTransfrom.position.y, player.position.z), Vector3.Left())
+    projectorColumnsTransfrom.lookAt( new Vector3(player.position.x, projectorColumnsTransfrom.position.y, player.position.z), Vector3.Up())
     ScreenGrpColumns.updateScreens(new Vector3(player.position.x, projectorColumnsTransfrom.position.y, player.position.z))
+
+    //ScreenGrpScatter.resetAllScreens()
   
-    this.elapsedTime += dt
-    this.angleRight = 0
-    let radius = 2    
-    let side = 2*radius * Math.tan(ToRadian(180/columnsRight.length))   
+    // this.elapsedTime += dt
+    // this.angleRight = 0
+    // let radius = 2    
+    // let side = 2*radius * Math.tan(ToRadian(180/columnsRight.length))   
 
     // for(let i = 0; i< columnsRight.length; i++){
       
