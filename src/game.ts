@@ -3,13 +3,12 @@ import { spawnTables } from './modules/tables'
 import utils from '../node_modules/decentraland-ecs-utils/index'
 import { movePlayerTo } from '@decentraland/RestrictedActions'
 import { initiateVJUI } from './modules/adminVJ'
-import { NPC } from '../node_modules/@dcl/npc-utils/index'
+import * as ui from '@dcl/ui-scene-utils'
+import { NPC } from '@dcl/npc-scene-utils'
 import { elf1Intro } from './modules/dialog'
 import { checkTime } from './modules/showPlaying'
 
 let shroomShape = new GLTFShape('models/shroom_building.glb')
-
-import * as ui from '../node_modules/@dcl/ui-utils/index'
 
 let shroomBuilding = new Entity()
 shroomBuilding.addComponent(new Transform({ position: scene.center }))

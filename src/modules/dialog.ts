@@ -1,4 +1,4 @@
-import { Dialog } from '../../node_modules/@dcl/npc-utils/index'
+import { Dialog } from '@dcl/npc-scene-utils'
 import { elf1 } from '../game'
 
 export let elf1Intro: Dialog[] = [

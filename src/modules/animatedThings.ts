@@ -140,7 +140,7 @@ class glassBreakSystem {
 }
 engine.addSystem(new glassBreakSystem())
 
-function rebuildGlasses(glass: Entity) {
+export function rebuildGlasses(glass: Entity) {
   let group = engine.getComponentGroup(ShatterGlass, Transform)
 
   for (let entity of group.entities) {
