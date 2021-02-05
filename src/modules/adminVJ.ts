@@ -52,38 +52,27 @@ export async function initiateVJUI() {
 
   if (authorized) {
     VJUI = new ui.CustomPrompt(ui.PromptStyles.DARKLARGE, null, null, true)
-    VJUI.background.positionX = 200
+    VJUI.background.positionX = 380
 
-    VJUI.addText('VJTron 2000', 0, 170, Color4.Gray(), 25)
+    VJUI.background.height = 650
 
-    VJUI.addText('Make Announcement', -80, 140)
+    VJUI.addText('VJTron 2000', 0, 320, Color4.Gray(), 25)
+
+    VJUI.addText('Make Announcement', -80, 280)
 
     let submittedText: string = ''
-    let textBox = VJUI.addTextBox(-50, 80, 'Announcement', (e: string) => {
+    let textBox = VJUI.addTextBox(-50, 220, 'Announcement', (e: string) => {
       submittedText = e
     })
-    VJUI.addButton('Send MSG', -100, 20, () => {
+    VJUI.addButton('Send MSG', -100, 160, () => {
       sceneMessageBus.emit('announcement', { text: submittedText })
     })
-
-    VJUI.addButton(
-      'Break Glass',
-      100,
-      20,
-      () => {
-        sceneMessageBus.emit('action', {
-          action: Action.GLASSBREAK,
-          freeMode: freeMode,
-        })
-      },
-      ui.ButtonStyles.RED
-    )
 
     // switches
     VJUI.addSwitch(
       'SMOKE',
       -190,
-      -40,
+      100,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.SMOKE,
@@ -95,13 +84,14 @@ export async function initiateVJUI() {
           action: Action.SMOKESTOP,
           freeMode: freeMode,
         })
-      }
+      },
+      ui.SwitchStyles.SQUAREGREEN
     )
 
     let dots = VJUI.addSwitch(
       'DOTS',
       -190,
-      -75,
+      65,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.DOTSSHOW,
@@ -113,13 +103,14 @@ export async function initiateVJUI() {
           action: Action.DOTSHIDE,
           freeMode: freeMode,
         })
-      }
+      },
+      ui.SwitchStyles.SQUAREGREEN
     )
 
     VJUI.addSwitch(
       'PULSE',
-      -60,
-      -75,
+      -30,
+      65,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.DOTSPULSE,
@@ -138,7 +129,7 @@ export async function initiateVJUI() {
     let laser = VJUI.addSwitch(
       'LASER',
       -190,
-      -110,
+      30,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.LASERSHOW,
@@ -150,13 +141,14 @@ export async function initiateVJUI() {
           action: Action.LASERHIDE,
           freeMode: freeMode,
         })
-      }
+      },
+      ui.SwitchStyles.SQUAREGREEN
     )
 
     VJUI.addSwitch(
       'ROT',
-      -60,
-      -110,
+      -30,
+      30,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.LASERROT,
@@ -174,8 +166,8 @@ export async function initiateVJUI() {
 
     VJUI.addSwitch(
       'PULSE',
-      0,
-      -110,
+      60,
+      30,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.LASERPULSE,
@@ -191,10 +183,33 @@ export async function initiateVJUI() {
       }
     )
 
+    let fastL = VJUI.addButton('Faster', -190, -15, () => {
+      sceneMessageBus.emit('action', {
+        action: Action.LASERROTFAST,
+        freeMode: freeMode,
+      })
+      laser.check()
+    })
+    fastL.image.width = 75
+    fastL.image.height = 40
+    fastL.label.fontSize = 12
+
+    let slowL = VJUI.addButton('Slower', -60, -15, () => {
+      sceneMessageBus.emit('action', {
+        action: Action.LASERROTSLOW,
+        freeMode: freeMode,
+      })
+      laser.check()
+    })
+
+    slowL.image.width = 75
+    slowL.image.height = 40
+    slowL.label.fontSize = 12
+
     let spiral = VJUI.addSwitch(
       'SPIRAL',
       -190,
-      -145,
+      -70,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.SPIRALSHOW,
@@ -208,13 +223,14 @@ export async function initiateVJUI() {
         })
         s1.uncheck()
         s2.uncheck()
-      }
+      },
+      ui.SwitchStyles.SQUAREGREEN
     )
 
     let s1 = VJUI.addSwitch(
       '1',
-      -100,
-      -145,
+      -40,
+      -70,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.SPIRAL1SHOW,
@@ -234,8 +250,8 @@ export async function initiateVJUI() {
 
     let s2 = VJUI.addSwitch(
       '2',
-      -0,
-      -145,
+      50,
+      -70,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.SPIRAL2SHOW,
@@ -253,6 +269,32 @@ export async function initiateVJUI() {
     )
 
     VJUI.addButton(
+      'Jump',
+      -140,
+      -150,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.PLAYERJUMP,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.RED
+    )
+
+    VJUI.addButton(
+      'Money',
+      0,
+      -150,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.PLAYERMONEY,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.RED
+    )
+
+    VJUI.addButton(
       'Clap',
       140,
       -150,
@@ -265,14 +307,53 @@ export async function initiateVJUI() {
       ui.ButtonStyles.RED
     )
 
+    VJUI.addButton(
+      'Dance',
+      -140,
+      -200,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.PLAYERDANCE,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.RED
+    )
+
+    VJUI.addButton(
+      'Wave',
+      0,
+      -200,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.PLAYERWAVE,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.RED
+    )
+
+    VJUI.addButton(
+      'Hand',
+      140,
+      -200,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.PLAYERHAND,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.RED
+    )
+
     // laser fast / slow
 
     // player actions
 
     VJUI.addSwitch(
       'FREE MODE',
-      70,
-      125,
+      -190,
+      -300,
       () => {
         sceneMessageBus.emit('playshow', { show: 'free' })
       },
@@ -281,6 +362,19 @@ export async function initiateVJUI() {
       },
       ui.SwitchStyles.SQUARERED,
       true
+    )
+
+    VJUI.addButton(
+      'Break Glass',
+      100,
+      -250,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.GLASSBREAK,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.RED
     )
 
     // VJUI.addButton('DEFAULT SHOW', -130, -60, () => {
