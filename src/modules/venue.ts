@@ -1,28 +1,18 @@
 import { scene } from './scene'
 import { spawnTables } from './tables'
-import { changeTexture, kittyTexture, dclLogoTexture } from './screenColumns'
-import { SmokeSwirl, startSmoke } from './smoke'
-import { DotLightsController } from './dotLights'
-import { LaserController } from './lasers'
-import { SpiralController } from './spirals'
-import { tvScreenController } from './screenColumns'
+//import { changeTexture, kittyTexture, dclLogoTexture } from './screenColumns'
+// import { SmokeSwirl, startSmoke } from './smoke'
+// import { DotLightsController } from './dotLights'
+// import { LaserController } from './lasers'
+// import { SpiralController } from './spirals'
+// import { tvScreenController } from './screenColumns'
 
 let bottlesBottomShape = new GLTFShape('models/bottles_bottom.glb')
 let bottlesTopShape = new GLTFShape('models/bottles_top.glb')
-
 let poleShape = new GLTFShape('models/pole.glb')
-
-// -- ADD MOVING DOTS EFFECT
-let dotLightsControl = new DotLightsController()
-
-// -- ADD LASER FAN EFFECT
-let laserControl = new LaserController()
-
-// -- ADD SPIRAL CEILING EFFECT
-let spiralControl = new SpiralController()
+let logoScreenShape = new GLTFShape('models/logo_screen.glb')
 
 // ADD dance poles
-
 let pole1 = new Entity()
 pole1.addComponent(
   new Transform({
@@ -98,3 +88,17 @@ spawnTables()
 //   spiralControl.hideAll()
 //   tvScreenController.splitVideoToEach()
 // })
+
+// add logo screen above bar
+let logoScreen = new Entity()
+logoScreen.addComponent(
+  new Transform({
+    position: new Vector3(
+      scene.venueCenter.x - 12.05,
+      scene.venueCenter.y + 4.3,
+      scene.venueCenter.z
+    ),
+  })
+)
+logoScreen.addComponent(logoScreenShape)
+engine.addEntity(logoScreen)
