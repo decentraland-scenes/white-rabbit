@@ -2,7 +2,7 @@ import * as ui from '@dcl/ui-scene-utils'
 import { getUserData, UserData } from '@decentraland/Identity'
 import { Action, runAction } from './eventScripts'
 import { isPreviewMode } from '@decentraland/EnvironmentAPI'
-import { shatterGlasses } from './animatedThings'
+
 import {
   checkEventServer,
   checkTime,
@@ -79,37 +79,200 @@ export async function initiateVJUI() {
       ui.ButtonStyles.RED
     )
 
-    let smokeOf = VJUI.addCheckbox('Smoke Off', 30, -80, () => {
-      sceneMessageBus.emit('action', {
-        action: Action.SMOKESTOP,
-        freeMode: freeMode,
-      })
-      smokeMid.uncheck()
-      smokeFull.uncheck()
-    })
+    // switches
+    VJUI.addSwitch(
+      'SMOKE',
+      -190,
+      -40,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.SMOKE,
+          freeMode: freeMode,
+        })
+      },
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.SMOKESTOP,
+          freeMode: freeMode,
+        })
+      }
+    )
 
-    let smokeMid = VJUI.addCheckbox('Smoke Mid', 30, -110, () => {
-      sceneMessageBus.emit('action', {
-        action: Action.SMOKEONLYBOTTOM,
-        freeMode: freeMode,
-      })
-      smokeOf.uncheck()
-      smokeFull.uncheck()
-    })
+    let dots = VJUI.addSwitch(
+      'DOTS',
+      -190,
+      -75,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.DOTSSHOW,
+          freeMode: freeMode,
+        })
+      },
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.DOTSHIDE,
+          freeMode: freeMode,
+        })
+      }
+    )
 
-    let smokeFull = VJUI.addCheckbox('Smoke FUll', 30, -140, () => {
-      sceneMessageBus.emit('action', {
-        action: Action.SMOKE,
-        freeMode: freeMode,
-      })
-      smokeMid.uncheck()
-      smokeOf.uncheck()
-    })
+    VJUI.addSwitch(
+      'PULSE',
+      -60,
+      -75,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.DOTSPULSE,
+          freeMode: freeMode,
+        })
+        dots.check()
+      },
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.DOTSSTOPPULSE,
+          freeMode: freeMode,
+        })
+      }
+    )
+
+    let laser = VJUI.addSwitch(
+      'LASER',
+      -190,
+      -110,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.LASERSHOW,
+          freeMode: freeMode,
+        })
+      },
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.LASERHIDE,
+          freeMode: freeMode,
+        })
+      }
+    )
+
+    VJUI.addSwitch(
+      'ROT',
+      -60,
+      -110,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.LASERROT,
+          freeMode: freeMode,
+        })
+        laser.check()
+      },
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.LASERROTOFF,
+          freeMode: freeMode,
+        })
+      }
+    )
+
+    VJUI.addSwitch(
+      'PULSE',
+      0,
+      -110,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.LASERPULSE,
+          freeMode: freeMode,
+        })
+        laser.check()
+      },
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.LASERPULSEOFF,
+          freeMode: freeMode,
+        })
+      }
+    )
+
+    let spiral = VJUI.addSwitch(
+      'SPIRAL',
+      -190,
+      -145,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.SPIRALSHOW,
+          freeMode: freeMode,
+        })
+      },
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.SPIRALHIDE,
+          freeMode: freeMode,
+        })
+        s1.uncheck()
+        s2.uncheck()
+      }
+    )
+
+    let s1 = VJUI.addSwitch(
+      '1',
+      -100,
+      -145,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.SPIRAL1SHOW,
+          freeMode: freeMode,
+        })
+
+        s2.uncheck()
+        spiral.uncheck()
+      },
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.SPIRAL1HIDE,
+          freeMode: freeMode,
+        })
+      }
+    )
+
+    let s2 = VJUI.addSwitch(
+      '2',
+      -0,
+      -145,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.SPIRAL2SHOW,
+          freeMode: freeMode,
+        })
+        s1.uncheck()
+        spiral.uncheck()
+      },
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.SPIRAL2HIDE,
+          freeMode: freeMode,
+        })
+      }
+    )
+
+    VJUI.addButton(
+      'Clap',
+      140,
+      -150,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.PLAYERCLAP,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.RED
+    )
+
+    // laser fast / slow
+
+    // player actions
 
     VJUI.addSwitch(
       'FREE MODE',
-      -160,
-      -60,
+      70,
+      125,
       () => {
         sceneMessageBus.emit('playshow', { show: 'free' })
       },
@@ -175,9 +338,3 @@ export async function initiateVJUI() {
     }
   })
 }
-
-const input = Input.instance
-input.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, true, (e) => {
-  //uiInstruction.visible = false
-  shatterGlasses()
-})

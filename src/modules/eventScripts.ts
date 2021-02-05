@@ -9,9 +9,17 @@ import {
 import {
   bottomSwirl2Shape,
   bottomSwirlShape,
-  shatterGlasses,
   topSwirlShape,
 } from '../modules/animatedThings'
+
+import {
+  dotLightsControl,
+  laserControl,
+  spiralControl,
+  windowControl,
+  smokeControl,
+} from './effectDashboard'
+import { PredefinedEmote, triggerEmote } from '@decentraland/RestrictedActions'
 
 export enum Action {
   STOPALL = 'stopall',
@@ -32,47 +40,52 @@ export enum Action {
   PUNCHI = 'punchi',
   PUNCHI_02 = 'punchi_02',
 
-  // singles
-  SMOKE = 'smoke',
-  SMOKEONLYBOTTOM = 'smokeonlybottom',
-  SMOKESTOP = 'smokestop',
-  GLASSBREAK = 'glassbreak',
+  // singles ///////////////
 
+  //smoke
+  SMOKE = 'smoke',
+  SMOKESTOP = 'smokestop',
+
+  // glass
+  GLASSBREAK = 'glassbreak',
+  GLASSBREAKRANDOM = 'glassbreakrandom',
+
+  // dots
+  DOTSSHOW = 'dotsshow',
+  DOTSHIDE = 'dotshide',
+  DOTSPULSE = 'dotspulse',
+  DOTSSTOPPULSE = 'dotsstoppulse',
+
+  // laser
+  LASERSHOW = 'lasershow',
+  LASERHIDE = 'laserhide',
+  LASERROT = 'laserrotate',
+  LASERROTOFF = 'laserrotoff',
+  LASERROTFAST = 'laserrotfast',
+  LASERROTSLOW = 'laserrotslow',
+  LASERPULSE = 'laserpulse',
+  LASERPULSEOFF = 'laserpulseoff',
+
+  // spiral
+  SPIRALSHOW = 'spiralshow',
+  SPIRALHIDE = 'spiralhide',
+  SPIRAL1SHOW = 'spiral1show',
+  SPIRAL1HIDE = 'spiral1hide',
+  SPIRAL2SHOW = 'spiral2show',
+  SPIRAL2HIDE = 'spiral2hide',
+
+  // video
   VIDEOPLAY = 'videoplay',
   VIDEOSTOP = 'videostop',
-  //   SIDELIGHTS3 = 'sidelights3',
-  //   SIDELIGHTSOFF = 'sidelightsoff',
 
-  //   CENTERLIGHTS1 = 'centerlights1',
-  //   CENTERLIGHTS2 = 'centerlights2',
-  //   CENTERLIGHTS3 = 'centerlights3',
-  //   CENTERLIGHTSOFF = 'centerlightsoff',
-
-  //   FLAMES1 = 'flames1',
-  //   FLAMES2 = 'flames2',
-  //   FLAMES3 = 'flames3',
-
-  //   SPEAKERS1 = 'speakers1',
-  //   SPEAKERS2 = 'speakers2',
-  //   SPEAKERSOFF = 'speakersoff',
-
-  //   ELECTRIC1 = 'electric1',
-  //   ELECTRIC2 = 'electric2',
-  //   ELECTRICOFF = 'electricoff',
-
-  //   TRIANGLES1 = 'triangles1',
-  //   TRIANGLES2 = 'triangles2',
-  //   TRIANGLES3 = 'triangles3',
-  //   TRIANGLESOFF = 'trianglesoff',
-
-  //   FLOWER1 = 'flower1',
-  //   FLOWER2 = 'flower2',
-  //   FLOWER3 = 'flower3',
-  //   FLOWEROFF = 'floweroff',
-
-  //   FLARES1 = 'flares1',
-  //   FLARES2 = 'flares2',
-  //   FLARESOFF = 'flaresoff',
+  // player emotes
+  PLAYERWAVE = 'playerwave',
+  PLAYERJUMP = 'playerjump',
+  PLAYERDANCE = 'playerdance',
+  PLAYERHAND = 'playerhand',
+  PLAYERCLAP = 'playerclap',
+  PLAYERMONEY = 'playermoney',
+  PLAYERKISS = 'playerkiss',
 
   //   BUBLES = 'bubles',
   //   VIDEOBUBLES = 'videobubles',
@@ -189,28 +202,115 @@ export function runAction(action: Action) {
       break
 
     /// SINGLE ACTIONS
+
     case Action.SMOKE:
-      topSwirlShape.visible = true
-      bottomSwirlShape.visible = true
-      bottomSwirl2Shape.visible = true
+      smokeControl.startSmoke()
       break
-
     case Action.SMOKESTOP:
-      topSwirlShape.visible = false
-      bottomSwirlShape.visible = false
-      bottomSwirl2Shape.visible = false
+      smokeControl.stopSmoke()
       break
-
-    case Action.SMOKEONLYBOTTOM:
-      topSwirlShape.visible = false
-      bottomSwirlShape.visible = true
-      bottomSwirl2Shape.visible = false
-      break
-
+    // glass
     case Action.GLASSBREAK:
-      shatterGlasses()
+      windowControl.shatterGlasses()
+      break
+    case Action.GLASSBREAKRANDOM:
+      let window = Math.floor(Math.random() * 12)
+      windowControl.shatterGlass(window)
+      break
+    // dots
+    case Action.DOTSSHOW:
+      dotLightsControl.show()
+      break
+    case Action.DOTSHIDE:
+      dotLightsControl.hide()
+      break
+    case Action.DOTSPULSE:
+      dotLightsControl.show()
+      dotLightsControl.activatePulse()
+      break
+    case Action.DOTSSTOPPULSE:
+      dotLightsControl.show()
+      dotLightsControl.deactivatePulse()
+      break
+    // laser
+    case Action.LASERSHOW:
+      laserControl.show()
+      break
+    case Action.LASERHIDE:
+      laserControl.hide()
+      break
+    case Action.LASERROT:
+      laserControl.show()
+      laserControl.rotate(true)
+
+      break
+    case Action.LASERROTOFF:
+      laserControl.show()
+      laserControl.rotate(false)
+
+      break
+    case Action.LASERROTFAST:
+      laserControl.show()
+      laserControl.changeRotationSpeedBy(10)
+      break
+    case Action.LASERROTSLOW:
+      laserControl.show()
+      laserControl.changeRotationSpeedBy(-10)
+      break
+    case Action.LASERPULSE:
+      laserControl.show()
+      laserControl.activateFanPulse(true)
+      break
+    case Action.LASERPULSEOFF:
+      laserControl.show()
+      laserControl.activateFanPulse(false)
+      break
+    // spiral
+    case Action.SPIRALSHOW:
+      spiralControl.showAll()
+      break
+    case Action.SPIRALHIDE:
+      spiralControl.hideAll()
+      break
+    case Action.SPIRAL1SHOW:
+      spiralControl.showFirst()
+      spiralControl.hideSecond()
+      break
+    case Action.SPIRAL1HIDE:
+      spiralControl.hideFirst()
+      break
+    case Action.SPIRAL2SHOW:
+      spiralControl.showSecond()
+      spiralControl.hideFirst()
+      break
+    case Action.SPIRAL2HIDE:
+      spiralControl.hideSecond()
       break
 
+    // player emotes
+    case Action.PLAYERWAVE:
+      triggerEmote({ predefined: PredefinedEmote.WAVE })
+      break
+    case Action.PLAYERJUMP:
+      triggerEmote({ predefined: PredefinedEmote.FIST_PUMP })
+      break
+    case Action.PLAYERDANCE:
+      triggerEmote({ predefined: PredefinedEmote.ROBOT })
+      break
+    case Action.PLAYERHAND:
+      triggerEmote({ predefined: PredefinedEmote.RAISE_HAND })
+      break
+    case Action.PLAYERCLAP:
+      triggerEmote({ predefined: PredefinedEmote.CLAP })
+      break
+    case Action.PLAYERMONEY:
+      triggerEmote({ predefined: PredefinedEmote.MONEY })
+      break
+    case Action.PLAYERKISS:
+      triggerEmote({ predefined: PredefinedEmote.KISS })
+      break
+
+    //vide
     case Action.VIDEOPLAY:
       break
 
@@ -403,23 +503,29 @@ export function runAction(action: Action) {
 export let ShowScripts: any = {
   DEFAULT: [
     { time: 0, event: Action.SMOKESTOP },
-    { time: 5, event: Action.SMOKEONLYBOTTOM },
+    { time: 5, event: Action.DOTSSHOW },
     { time: 10, event: Action.SMOKE },
     { time: 20, event: Action.SMOKESTOP },
+    { time: 20, event: Action.LASERSHOW },
     { time: 20, event: Action.GLASSBREAK },
-    { time: 30, event: Action.SMOKEONLYBOTTOM },
+    { time: 30, event: Action.LASERROT },
+    { time: 30, event: Action.SPIRALSHOW },
     { time: 50, event: Action.SMOKE },
+    { time: 30, event: Action.LASERPULSE },
     { time: 60, event: Action.SMOKE },
   ],
   RAC: [],
   TEST: [
     { time: 0, event: Action.SMOKESTOP },
-    { time: 5, event: Action.SMOKEONLYBOTTOM },
+    { time: 5, event: Action.DOTSSHOW },
     { time: 10, event: Action.SMOKE },
     { time: 20, event: Action.SMOKESTOP },
+    { time: 20, event: Action.LASERSHOW },
     { time: 20, event: Action.GLASSBREAK },
-    { time: 30, event: Action.SMOKEONLYBOTTOM },
+    { time: 30, event: Action.LASERROT },
+    { time: 30, event: Action.SPIRALSHOW },
     { time: 50, event: Action.SMOKE },
+    { time: 30, event: Action.LASERPULSE },
     { time: 60, event: Action.SMOKE },
   ],
 }
