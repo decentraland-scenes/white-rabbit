@@ -25,16 +25,6 @@ engine.addEntity(shroomBuilding)
 
 spawnTables()
 
-utils.addTestCube(
-  {
-    position: new Vector3(66, 1, 32),
-  },
-  () => {
-    movePlayerTo({ x: 66, y: 32, z: 32 })
-  },
-  'Go Up ^'
-)
-
 initiateVJUI()
 
 // Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, true, (e) => {

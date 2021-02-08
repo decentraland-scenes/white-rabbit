@@ -11,6 +11,7 @@ import {
   showPlayingFalse,
   StartShow,
 } from './showPlaying'
+import { movePlayerTo } from '@decentraland/RestrictedActions'
 
 export let userData: UserData
 
@@ -31,6 +32,8 @@ export let whiteListedIds = ['NicoE', 'Crench#22cb']
 export const sceneMessageBus = new MessageBus()
 
 let VJUI: ui.CustomPrompt
+
+let bouncerUI: ui.FillInPrompt
 
 export async function initiateVJUI() {
   if (!userData) {
@@ -393,6 +396,19 @@ export async function initiateVJUI() {
     //   sceneMessageBus.emit('playshow', { show: 'free' })
     // })
 
+    bouncerUI = new ui.FillInPrompt(
+      'Digital Bouncer',
+      (e: string) => {
+        sceneMessageBus.emit('kick', {
+          player: e,
+        })
+      },
+      'Kick',
+      'player name',
+      true
+    )
+    bouncerUI.hide()
+
     Input.instance.subscribe(
       'BUTTON_DOWN',
       ActionButton.PRIMARY,
@@ -403,6 +419,21 @@ export async function initiateVJUI() {
             VJUI.show()
           } else {
             VJUI.hide()
+          }
+        }
+      }
+    )
+
+    Input.instance.subscribe(
+      'BUTTON_DOWN',
+      ActionButton.SECONDARY,
+      false,
+      (e) => {
+        if (bouncerUI) {
+          if (!bouncerUI.background.visible) {
+            bouncerUI.show()
+          } else {
+            bouncerUI.hide()
           }
         }
       }
@@ -432,3 +463,13 @@ export async function initiateVJUI() {
     }
   })
 }
+
+sceneMessageBus.on('kick', async (e) => {
+  if (!userData) {
+    await setUserData()
+  }
+
+  if (e.player == userData.displayName) {
+    movePlayerTo({ x: 60, y: 5, z: 32 })
+  }
+})
