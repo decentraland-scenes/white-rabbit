@@ -5,12 +5,6 @@ import {
   showPlayingFalse,
   showPlayingTrue,
 } from './showPlaying'
-//import { bubbleScreenController, myVideoTexture } from './modules/video'
-import {
-  bottomSwirl2Shape,
-  bottomSwirlShape,
-  topSwirlShape,
-} from '../modules/animatedThings'
 
 import {
   dotLightsControl,
