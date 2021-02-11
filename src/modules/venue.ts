@@ -1,4 +1,5 @@
 import { scene } from './scene'
+import { Synced } from './syncable'
 import { spawnTables } from './tables'
 //import { changeTexture, kittyTexture, dclLogoTexture } from './screenColumns'
 // import { SmokeSwirl, startSmoke } from './smoke'
@@ -102,3 +103,11 @@ logoScreen.addComponent(
 )
 logoScreen.addComponent(logoScreenShape)
 engine.addEntity(logoScreen)
+
+// DJ
+
+export let dj = new Synced(new GLTFShape('models/RAC_NPC.glb'), false, 'idle', {
+  position: new Vector3(77, 29.7, 31.3),
+  rotation: Quaternion.Euler(0, 270, 0),
+  scale: new Vector3(1.5, 1.5, 1.5),
+})

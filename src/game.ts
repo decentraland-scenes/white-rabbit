@@ -7,6 +7,7 @@ import * as ui from '@dcl/ui-scene-utils'
 import { NPC } from '@dcl/npc-scene-utils'
 import { elf1Intro } from './modules/dialog'
 import { checkTime } from './modules/showPlaying'
+import { Synced } from './modules/syncable'
 
 let shroomShape = new GLTFShape('models/shroom_building.glb')
 
@@ -27,17 +28,17 @@ spawnTables()
 
 initiateVJUI()
 
-// Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, true, (e) => {
-//   log(
-//     `{ position: new Vector3(`,
-//     Camera.instance.position.x,
-//     ',',
-//     Camera.instance.position.y,
-//     ',',
-//     Camera.instance.position.z,
-//     `) },`
-//   )
-// })
+Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, true, (e) => {
+  log(
+    `{ position: new Vector3(`,
+    Camera.instance.position.x,
+    ',',
+    Camera.instance.position.y,
+    ',',
+    Camera.instance.position.z,
+    `) },`
+  )
+})
 
 export let elf1 = new NPC(
   { position: new Vector3(28, 0, 32), scale: new Vector3(6, 6, 6) },
@@ -69,5 +70,5 @@ export let elf2 = new NPC(
   }
 )
 
-// start default show
+// start default light show
 checkTime()

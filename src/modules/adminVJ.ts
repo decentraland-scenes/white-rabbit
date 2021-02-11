@@ -271,10 +271,10 @@ export async function initiateVJUI() {
       }
     )
 
-    VJUI.addButton(
+    let jump = VJUI.addButton(
       'Jump',
-      -140,
-      -150,
+      -190,
+      -130,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.PLAYERJUMP,
@@ -284,10 +284,10 @@ export async function initiateVJUI() {
       ui.ButtonStyles.RED
     )
 
-    VJUI.addButton(
+    let money = VJUI.addButton(
       'Money',
-      0,
-      -150,
+      -100,
+      -130,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.PLAYERMONEY,
@@ -297,10 +297,10 @@ export async function initiateVJUI() {
       ui.ButtonStyles.RED
     )
 
-    VJUI.addButton(
+    let clap = VJUI.addButton(
       'Clap',
-      140,
-      -150,
+      -10,
+      -130,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.PLAYERCLAP,
@@ -310,10 +310,10 @@ export async function initiateVJUI() {
       ui.ButtonStyles.RED
     )
 
-    VJUI.addButton(
+    let dance = VJUI.addButton(
       'Dance',
-      -140,
-      -200,
+      80,
+      -130,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.PLAYERDANCE,
@@ -323,23 +323,23 @@ export async function initiateVJUI() {
       ui.ButtonStyles.RED
     )
 
-    VJUI.addButton(
-      'Wave',
-      0,
-      -200,
-      () => {
-        sceneMessageBus.emit('action', {
-          action: Action.PLAYERWAVE,
-          freeMode: freeMode,
-        })
-      },
-      ui.ButtonStyles.RED
-    )
+    // let wave = VJUI.addButton(
+    //   'Wave',
+    //   0,
+    //   -200,
+    //   () => {
+    //     sceneMessageBus.emit('action', {
+    //       action: Action.PLAYERWAVE,
+    //       freeMode: freeMode,
+    //     })
+    //   },
+    //   ui.ButtonStyles.RED
+    // )
 
-    VJUI.addButton(
+    let hand = VJUI.addButton(
       'Hand',
-      140,
-      -200,
+      170,
+      -130,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.PLAYERHAND,
@@ -349,7 +349,167 @@ export async function initiateVJUI() {
       ui.ButtonStyles.RED
     )
 
-    // laser fast / slow
+    jump.image.width = 75
+    jump.image.height = 40
+    jump.label.fontSize = 12
+
+    money.image.width = 75
+    money.image.height = 40
+    money.label.fontSize = 12
+
+    clap.image.width = 75
+    clap.image.height = 40
+    clap.label.fontSize = 12
+
+    dance.image.width = 75
+    dance.image.height = 40
+    dance.label.fontSize = 12
+
+    // wave.image.width = 75
+    // wave.image.height = 40
+    // wave.label.fontSize = 12
+
+    hand.image.width = 75
+    hand.image.height = 40
+    hand.label.fontSize = 12
+
+    let racBounce = VJUI.addButton(
+      'Bounce',
+      -190,
+      -190,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.RACBOUNCE,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.SQUAREGOLD
+    )
+
+    let racChill = VJUI.addButton(
+      'Chill',
+      -100,
+      -190,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.RACCHILL,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.SQUAREGOLD
+    )
+
+    let racClap = VJUI.addButton(
+      'Clap',
+      -10,
+      -190,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.RACCLAP,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.SQUAREGOLD
+    )
+
+    let racEpic = VJUI.addButton(
+      'Epic',
+      80,
+      -190,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.RACEPIC,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.SQUAREGOLD
+    )
+
+    let racHorns = VJUI.addButton(
+      'Horns',
+      170,
+      -190,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.RACHORNS,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.SQUAREGOLD
+    )
+
+    let racMix = VJUI.addButton(
+      'Mix',
+      40,
+      -240,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.RACMIXING,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.SQUAREGOLD
+    )
+
+    let racPlay = VJUI.addButton(
+      'Play',
+      -50,
+      -240,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.RACPLAY,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.SQUAREGOLD
+    )
+
+    VJUI.addSwitch(
+      'DJ',
+      -190,
+      -240,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.LASERPULSE,
+          freeMode: freeMode,
+        })
+        laser.check()
+      },
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.LASERPULSEOFF,
+          freeMode: freeMode,
+        })
+      }
+    )
+
+    racBounce.image.width = 75
+    racBounce.image.height = 40
+    racBounce.label.fontSize = 12
+
+    racChill.image.width = 75
+    racChill.image.height = 40
+    racChill.label.fontSize = 12
+
+    racEpic.image.width = 75
+    racEpic.image.height = 40
+    racEpic.label.fontSize = 12
+
+    racClap.image.width = 75
+    racClap.image.height = 40
+    racClap.label.fontSize = 12
+
+    racHorns.image.width = 75
+    racHorns.image.height = 40
+    racHorns.label.fontSize = 12
+
+    racPlay.image.width = 75
+    racPlay.image.height = 40
+    racPlay.label.fontSize = 12
+
+    racMix.image.width = 75
+    racMix.image.height = 40
+    racMix.label.fontSize = 12
 
     // player actions
 
@@ -370,7 +530,7 @@ export async function initiateVJUI() {
     VJUI.addButton(
       'Break Glass',
       100,
-      -250,
+      -300,
       () => {
         sceneMessageBus.emit('action', {
           action: Action.GLASSBREAK,

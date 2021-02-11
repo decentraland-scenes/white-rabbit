@@ -1,4 +1,3 @@
-import * as utils from '@dcl/ecs-scene-utils'
 import {
   checkTime,
   showPlaying,
@@ -14,6 +13,7 @@ import {
   smokeControl,
 } from './effectDashboard'
 import { PredefinedEmote, triggerEmote } from '@decentraland/RestrictedActions'
+import { dj } from './venue'
 
 export enum Action {
   STOPALL = 'stopall',
@@ -87,15 +87,15 @@ export enum Action {
   //   BUBLESOFF = 'bublesoff',
   //   VIDEOBUBLESOFF = 'videobublesoff',
 
-  //   RACAPPEAR = 'racappear',
-  //   RACGO = 'racgo',
-  //   RACBOUNCE = 'racbounce',
-  //   RACCHILL = 'racchill',
-  //   RACCLAP = 'racclap',
-  //   RACEPIC = 'racepic',
-  //   RACHORNS = 'rachorns',
-  //   RACMIXING = 'racmixing',
-  //   RACPLAY = 'racplay',
+  RACAPPEAR = 'racappear',
+  RACGO = 'racgo',
+  RACBOUNCE = 'racbounce',
+  RACCHILL = 'racchill',
+  RACCLAP = 'racclap',
+  RACEPIC = 'racepic',
+  RACHORNS = 'rachorns',
+  RACMIXING = 'racmixing',
+  RACPLAY = 'racplay',
   //   RACDECONSTRUCTED = 'racdeconstructed',
   //   RACDECONSTRUCT = 'racdeconstruct',
   //   RACRECONSTRUCT = 'racreconstruct',
@@ -103,13 +103,7 @@ export enum Action {
   //   RACGRAVITY = 'racgrav',
   //   RACGTEASER = 'racrgteaser',
 
-  //   ALLFIREWORKS = 'allfireworks',
-  //   RANDOMFIREWORK = 'randomfirework',
-  //   CENTERFIREWORKS = 'centerfireworks',
-  //   SIDEFIREWORKS = 'sidefireworks',
-
   //   TELEPORTS = 'teleports',
-  //   NYBANNER = 'nybanner',
 }
 
 export function runAction(action: Action) {
@@ -323,34 +317,34 @@ export function runAction(action: Action) {
     //   speakers.hide()
     //   break
 
-    // case Action.RACBOUNCE:
-    //   dj.playAnimation('bounce', true, 2.37)
-    //   dj2.playAnimation('bounce', true, 2.37)
-    //   break
-    // case Action.RACCHILL:
-    //   dj.playAnimation('chill', true, 6.7)
-    //   dj2.playAnimation('chill', true, 6.7)
-    //   break
-    // case Action.RACCLAP:
-    //   dj.playAnimation('clap', true, 2.87)
-    //   dj2.playAnimation('clap', true, 2.87)
-    //   break
-    // case Action.RACEPIC:
-    //   dj.playAnimation('epic', true, 5.03)
-    //   dj2.playAnimation('epic', true, 5.03)
-    //   break
-    // case Action.RACHORNS:
-    //   dj.playAnimation('horns', true, 4)
-    //   dj2.playAnimation('horns', true, 4)
-    //   break
-    // case Action.RACMIXING:
-    //   dj.playAnimation('mixing', true, 8.7)
-    //   dj2.playAnimation('mixing', true, 8.7)
-    //   break
-    // case Action.RACPLAY:
-    //   dj.playAnimation('play', true, 1.03)
-    //   dj2.playAnimation('play', true, 1.03)
-    //   break
+    case Action.RACBOUNCE:
+      dj.playAnimation('bounce', true, 2.37)
+
+      break
+    case Action.RACCHILL:
+      dj.playAnimation('chill', true, 6.7)
+
+      break
+    case Action.RACCLAP:
+      dj.playAnimation('clap', true, 2.87)
+
+      break
+    case Action.RACEPIC:
+      dj.playAnimation('epic', true, 5.03)
+
+      break
+    case Action.RACHORNS:
+      dj.playAnimation('horns', true, 4)
+
+      break
+    case Action.RACMIXING:
+      dj.playAnimation('mixing', true, 8.7)
+
+      break
+    case Action.RACPLAY:
+      dj.playAnimation('play', true, 1.03)
+
+      break
 
     // case Action.RACDECONSTRUCT:
     //   dj.playAnimation('deconstruct', true, 1.13)
@@ -388,18 +382,16 @@ export function runAction(action: Action) {
     //   dj2.setNewIdleAnim('burst')
     //   break
 
-    // case Action.RACAPPEAR:
-    //   dj.appear()
-    //   dj2.appear()
-    //   dj.setNewIdleAnim('idle')
-    //   dj2.setNewIdleAnim('idle')
-    //   deck1.appear()
-    //   deck2.appear()
-    //   break
-    // case Action.RACGO:
-    //   dj.hide()
-    //   dj2.hide()
-    //   break
+    case Action.RACAPPEAR:
+      dj.appear()
+
+      dj.setNewIdleAnim('idle')
+
+      break
+    case Action.RACGO:
+      dj.hide()
+
+      break
 
     // case Action.BUBLES:
     //   startLiftBubbles(bubbleLiftSystem)
@@ -415,73 +407,6 @@ export function runAction(action: Action) {
     // case Action.VIDEOBUBLESOFF:
     //   bubbleScreenController.stopRandomBubbles()
     //   bubbleScreenController.stopSpeakerBubbles()
-    //   break
-
-    // case Action.ALLFIREWORKS:
-    //   firework1.appear()
-    //   firework2.appear()
-    //   firework3.appear()
-    //   firework4.appear()
-    //   firework5.appear()
-    //   firework6.appear()
-
-    //   firework1.playAnimation('Play', true, 4.63)
-    //   firework2.playAnimation('Play', true, 4.63)
-    //   firework3.playAnimation('Play', true, 4.63)
-    //   firework4.playAnimation('Play', true, 4.63)
-    //   firework5.playAnimation('Play', true, 4.63)
-    //   firework6.playAnimation('Play', true, 4.63)
-
-    //   break
-
-    // case Action.RANDOMFIREWORK:
-    //   let i = Math.floor(Math.random() * 6)
-
-    //   switch (i) {
-    //     case 0:
-    //       firework1.appear()
-
-    //       firework1.playAnimation('Play', true, 4.63)
-    //       break
-    //     case 1:
-    //       firework2.appear()
-    //       firework2.playAnimation('Play', true, 4.63)
-    //       break
-    //     case 2:
-    //       firework3.appear()
-    //       firework3.playAnimation('Play', true, 4.63)
-    //       break
-    //     case 3:
-    //       firework4.appear()
-    //       firework4.playAnimation('Play', true, 4.63)
-    //       break
-    //     case 4:
-    //       firework5.appear()
-    //       firework5.playAnimation('Play', true, 4.63)
-    //       break
-    //     case 5:
-    //       firework6.appear()
-    //       firework6.playAnimation('Play', true, 4.63)
-    //       break
-    //   }
-    //   break
-
-    // case Action.CENTERFIREWORKS:
-    //   firework1.appear()
-    //   firework1.playAnimation('Play', true, 4.63)
-    //   firework4.appear()
-    //   firework4.playAnimation('Play', true, 4.63)
-    //   break
-
-    // case Action.SIDEFIREWORKS:
-    //   firework2.appear()
-    //   firework2.playAnimation('Play', true, 4.63)
-    //   firework3.appear()
-    //   firework3.playAnimation('Play', true, 4.63)
-    //   firework5.appear()
-    //   firework5.playAnimation('Play', true, 4.63)
-    //   firework6.appear()
-    //   firework6.playAnimation('Play', true, 4.63)
     //   break
 
     // case Action.TELEPORTS:
