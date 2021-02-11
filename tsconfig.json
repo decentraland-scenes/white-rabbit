@@ -8,6 +8,9 @@
       ],
       "@dcl/npc-scene-utils": [
         "node_modules/@dcl/npc-scene-utils/dist/index.d.ts"
+      ],
+      "@dcl/ecs-scene-utils": [
+        "node_modules/@dcl/ecs-scene-utils/dist/index.d.ts"
       ]
     },
     "baseUrl": "."
