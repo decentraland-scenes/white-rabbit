@@ -27,7 +27,16 @@ export async function setUserData() {
   userData = data
 }
 
-export let whiteListedIds = ['NicoE', 'Crench#22cb']
+export let whiteListedIds = [
+  'NicoE',
+  'sam',
+  'Jungle',
+  'MANA',
+  'Bence',
+  'Tak',
+  'KJWalker',
+  'Shibu',
+]
 
 export const sceneMessageBus = new MessageBus()
 
@@ -387,12 +396,12 @@ export async function initiateVJUI() {
     )
 
     let racChill = VJUI.addButton(
-      'Chill',
+      'Wave',
       -100,
       -190,
       () => {
         sceneMessageBus.emit('action', {
-          action: Action.RACCHILL,
+          action: Action.RACWAVE,
           freeMode: freeMode,
         })
       },
@@ -426,12 +435,12 @@ export async function initiateVJUI() {
     )
 
     let racHorns = VJUI.addButton(
-      'Horns',
+      'HandUp',
       170,
       -190,
       () => {
         sceneMessageBus.emit('action', {
-          action: Action.RACHORNS,
+          action: Action.RACHANDUP,
           freeMode: freeMode,
         })
       },
@@ -521,7 +530,7 @@ export async function initiateVJUI() {
         sceneMessageBus.emit('playshow', { show: 'free' })
       },
       () => {
-        sceneMessageBus.emit('playshow', { show: 'default' })
+        sceneMessageBus.emit('playshow', { show: 'server' })
       },
       ui.SwitchStyles.SQUARERED,
       true
