@@ -2,6 +2,7 @@ import * as ui from '@dcl/ui-scene-utils'
 import { getUserData, UserData } from '@decentraland/Identity'
 import { Action, runAction } from './eventScripts'
 import { isPreviewMode } from '@decentraland/EnvironmentAPI'
+import { GameManager } from "./arcades/gameManager"
 
 import {
   checkEventServer,
@@ -583,7 +584,7 @@ export async function initiateVJUI() {
       ActionButton.PRIMARY,
       false,
       (e) => {
-        if (VJUI) {
+        if (VJUI && !GameManager.hasGameLoaded) {
           if (!VJUI.background.visible) {
             VJUI.show()
           } else {
@@ -598,7 +599,7 @@ export async function initiateVJUI() {
       ActionButton.SECONDARY,
       false,
       (e) => {
-        if (bouncerUI) {
+        if (bouncerUI && !GameManager.hasGameLoaded) {
           if (!bouncerUI.background.visible) {
             bouncerUI.show()
           } else {
