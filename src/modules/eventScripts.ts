@@ -13,7 +13,7 @@ import {
   smokeControl,
 } from './effectDashboard'
 import { PredefinedEmote, triggerEmote } from '@decentraland/RestrictedActions'
-import { dj } from './venue'
+//import { dj } from './venue'
 
 export enum Action {
   STOPALL = 'stopall',
@@ -317,34 +317,34 @@ export function runAction(action: Action) {
     //   speakers.hide()
     //   break
 
-    case Action.RACBOUNCE:
-      dj.playAnimation('bounce', true, 2.37)
+    // case Action.RACBOUNCE:
+    //   dj.playAnimation('bounce', true, 2.37)
 
-      break
-    case Action.RACCHILL:
-      dj.playAnimation('chill', true, 6.7)
+    //   break
+    // case Action.RACCHILL:
+    //   dj.playAnimation('chill', true, 6.7)
 
-      break
-    case Action.RACCLAP:
-      dj.playAnimation('clap', true, 2.87)
+    //   break
+    // case Action.RACCLAP:
+    //   dj.playAnimation('clap', true, 2.87)
 
-      break
-    case Action.RACEPIC:
-      dj.playAnimation('epic', true, 5.03)
+    //   break
+    // case Action.RACEPIC:
+    //   dj.playAnimation('epic', true, 5.03)
 
-      break
-    case Action.RACHORNS:
-      dj.playAnimation('horns', true, 4)
+    //   break
+    // case Action.RACHORNS:
+    //   dj.playAnimation('horns', true, 4)
 
-      break
-    case Action.RACMIXING:
-      dj.playAnimation('mixing', true, 8.7)
+    //   break
+    // case Action.RACMIXING:
+    //   dj.playAnimation('mixing', true, 8.7)
 
-      break
-    case Action.RACPLAY:
-      dj.playAnimation('play', true, 1.03)
+    //   break
+    // case Action.RACPLAY:
+    //   dj.playAnimation('play', true, 1.03)
 
-      break
+    //   break
 
     // case Action.RACDECONSTRUCT:
     //   dj.playAnimation('deconstruct', true, 1.13)
@@ -382,16 +382,16 @@ export function runAction(action: Action) {
     //   dj2.setNewIdleAnim('burst')
     //   break
 
-    case Action.RACAPPEAR:
-      dj.appear()
+    // case Action.RACAPPEAR:
+    //   dj.appear()
 
-      dj.setNewIdleAnim('idle')
+    //   dj.setNewIdleAnim('idle')
 
-      break
-    case Action.RACGO:
-      dj.hide()
+    //   break
+    // case Action.RACGO:
+    //   dj.hide()
 
-      break
+    //   break
 
     // case Action.BUBLES:
     //   startLiftBubbles(bubbleLiftSystem)

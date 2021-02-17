@@ -106,8 +106,8 @@ engine.addEntity(logoScreen)
 
 // DJ
 
-export let dj = new Synced(new GLTFShape('models/RAC_NPC.glb'), false, 'idle', {
-  position: new Vector3(77, 29.7, 31.3),
-  rotation: Quaternion.Euler(0, 270, 0),
-  scale: new Vector3(1.5, 1.5, 1.5),
-})
+// export let dj = new Synced(new GLTFShape('models/RAC_NPC.glb'), false, 'idle', {
+//   position: new Vector3(77, 29.7, 31.3),
+//   rotation: Quaternion.Euler(0, 270, 0),
+//   scale: new Vector3(1.5, 1.5, 1.5),
+// })
