@@ -15,12 +15,10 @@
   },
   "dependencies": {
     "@dcl/ecs-scene-utils": "^1.6.1",
-    "@dcl/npc-scene-utils": "^1.2.10",
     "@dcl/ui-scene-utils": "^1.6.12"
   },
   "bundleDependencies": [
     "@dcl/ui-scene-utils",
-    "@dcl/npc-scene-utils",
     "@dcl/ecs-scene-utils"
   ]
 }
