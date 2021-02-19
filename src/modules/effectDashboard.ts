@@ -288,14 +288,14 @@ class EffectDashboard {
   }
 }
 
-let dashboard = new EffectDashboard({
-  position: new Vector3(
-    scene.venueCenter.x - 13,
-    scene.venueCenter.y + 1,
-    scene.venueCenter.z
-  ),
-  rotation: Quaternion.Euler(0, 90, 0),
-})
+// let dashboard = new EffectDashboard({
+//   position: new Vector3(
+//     scene.venueCenter.x - 13,
+//     scene.venueCenter.y + 1,
+//     scene.venueCenter.z
+//   ),
+//   rotation: Quaternion.Euler(0, 90, 0),
+// })
 
 //effectUIRoot.setParent(Attachable.AVATAR)
 
