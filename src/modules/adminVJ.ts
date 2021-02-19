@@ -534,7 +534,7 @@ export async function initiateVJUI() {
         sceneMessageBus.emit('playshow', { show: 'free' })
       },
       ui.SwitchStyles.SQUARERED,
-      true
+      false
     )
 
     VJUI.addButton(
