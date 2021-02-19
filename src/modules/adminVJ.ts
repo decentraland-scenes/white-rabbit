@@ -333,19 +333,6 @@ export async function initiateVJUI() {
       ui.ButtonStyles.RED
     )
 
-    // let wave = VJUI.addButton(
-    //   'Wave',
-    //   0,
-    //   -200,
-    //   () => {
-    //     sceneMessageBus.emit('action', {
-    //       action: Action.PLAYERWAVE,
-    //       freeMode: freeMode,
-    //     })
-    //   },
-    //   ui.ButtonStyles.RED
-    // )
-
     let hand = VJUI.addButton(
       'Hand',
       170,
@@ -353,6 +340,58 @@ export async function initiateVJUI() {
       () => {
         sceneMessageBus.emit('action', {
           action: Action.PLAYERHAND,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.RED
+    )
+
+    let kiss = VJUI.addButton(
+      'Kiss',
+      -190,
+      -180,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.PLAYERKISS,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.RED
+    )
+
+    let tik = VJUI.addButton(
+      'Tik',
+      -100,
+      -180,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.PLAYERTIK,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.RED
+    )
+
+    let tektonik = VJUI.addButton(
+      'Tekto',
+      -10,
+      -180,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.PLAYERTEKTO,
+          freeMode: freeMode,
+        })
+      },
+      ui.ButtonStyles.RED
+    )
+
+    let hammer = VJUI.addButton(
+      'Hammer',
+      80,
+      -180,
+      () => {
+        sceneMessageBus.emit('action', {
+          action: Action.PLAYERHAMMER,
           freeMode: freeMode,
         })
       },
@@ -375,151 +414,25 @@ export async function initiateVJUI() {
     dance.image.height = 40
     dance.label.fontSize = 12
 
-    // wave.image.width = 75
-    // wave.image.height = 40
-    // wave.label.fontSize = 12
-
     hand.image.width = 75
     hand.image.height = 40
     hand.label.fontSize = 12
 
-    // let racBounce = VJUI.addButton(
-    //   'Bounce',
-    //   -190,
-    //   -190,
-    //   () => {
-    //     sceneMessageBus.emit('action', {
-    //       action: Action.RACBOUNCE,
-    //       freeMode: freeMode,
-    //     })
-    //   },
-    //   ui.ButtonStyles.SQUAREGOLD
-    // )
+    tik.image.width = 75
+    tik.image.height = 40
+    tik.label.fontSize = 12
 
-    // let racChill = VJUI.addButton(
-    //   'Wave',
-    //   -100,
-    //   -190,
-    //   () => {
-    //     sceneMessageBus.emit('action', {
-    //       action: Action.RACWAVE,
-    //       freeMode: freeMode,
-    //     })
-    //   },
-    //   ui.ButtonStyles.SQUAREGOLD
-    // )
+    tektonik.image.width = 75
+    tektonik.image.height = 40
+    tektonik.label.fontSize = 12
 
-    // let racClap = VJUI.addButton(
-    //   'Clap',
-    //   -10,
-    //   -190,
-    //   () => {
-    //     sceneMessageBus.emit('action', {
-    //       action: Action.RACCLAP,
-    //       freeMode: freeMode,
-    //     })
-    //   },
-    //   ui.ButtonStyles.SQUAREGOLD
-    // )
+    hammer.image.width = 75
+    hammer.image.height = 40
+    hammer.label.fontSize = 12
 
-    // let racEpic = VJUI.addButton(
-    //   'Epic',
-    //   80,
-    //   -190,
-    //   () => {
-    //     sceneMessageBus.emit('action', {
-    //       action: Action.RACEPIC,
-    //       freeMode: freeMode,
-    //     })
-    //   },
-    //   ui.ButtonStyles.SQUAREGOLD
-    // )
-
-    // let racHorns = VJUI.addButton(
-    //   'HandUp',
-    //   170,
-    //   -190,
-    //   () => {
-    //     sceneMessageBus.emit('action', {
-    //       action: Action.RACHANDUP,
-    //       freeMode: freeMode,
-    //     })
-    //   },
-    //   ui.ButtonStyles.SQUAREGOLD
-    // )
-
-    // let racMix = VJUI.addButton(
-    //   'Mix',
-    //   40,
-    //   -240,
-    //   () => {
-    //     sceneMessageBus.emit('action', {
-    //       action: Action.RACMIXING,
-    //       freeMode: freeMode,
-    //     })
-    //   },
-    //   ui.ButtonStyles.SQUAREGOLD
-    // )
-
-    // let racPlay = VJUI.addButton(
-    //   'Play',
-    //   -50,
-    //   -240,
-    //   () => {
-    //     sceneMessageBus.emit('action', {
-    //       action: Action.RACPLAY,
-    //       freeMode: freeMode,
-    //     })
-    //   },
-    //   ui.ButtonStyles.SQUAREGOLD
-    // )
-
-    // VJUI.addSwitch(
-    //   'DJ',
-    //   -190,
-    //   -240,
-    //   () => {
-    //     sceneMessageBus.emit('action', {
-    //       action: Action.LASERPULSE,
-    //       freeMode: freeMode,
-    //     })
-    //     laser.check()
-    //   },
-    //   () => {
-    //     sceneMessageBus.emit('action', {
-    //       action: Action.LASERPULSEOFF,
-    //       freeMode: freeMode,
-    //     })
-    //   }
-    // )
-
-    // racBounce.image.width = 75
-    // racBounce.image.height = 40
-    // racBounce.label.fontSize = 12
-
-    // racChill.image.width = 75
-    // racChill.image.height = 40
-    // racChill.label.fontSize = 12
-
-    // racEpic.image.width = 75
-    // racEpic.image.height = 40
-    // racEpic.label.fontSize = 12
-
-    // racClap.image.width = 75
-    // racClap.image.height = 40
-    // racClap.label.fontSize = 12
-
-    // racHorns.image.width = 75
-    // racHorns.image.height = 40
-    // racHorns.label.fontSize = 12
-
-    // racPlay.image.width = 75
-    // racPlay.image.height = 40
-    // racPlay.label.fontSize = 12
-
-    // racMix.image.width = 75
-    // racMix.image.height = 40
-    // racMix.label.fontSize = 12
+    kiss.image.width = 75
+    kiss.image.height = 40
+    kiss.label.fontSize = 12
 
     // player actions
 
