@@ -81,6 +81,10 @@ export enum Action {
   PLAYERMONEY = 'playermoney',
   PLAYERKISS = 'playerkiss',
 
+  PLAYERTIK = 'playertik',
+  PLAYERTEKTO = 'playertekto',
+  PLAYERHAMMER = 'playerhammer',
+
   //   BUBLES = 'bubles',
   //   VIDEOBUBLES = 'videobubles',
   //   FEWVIDOEBUBBLES = 'fewvideobubbles',
@@ -296,6 +300,21 @@ export function runAction(action: Action) {
       break
     case Action.PLAYERKISS:
       triggerEmote({ predefined: PredefinedEmote.KISS })
+      break
+
+    case Action.PLAYERTIK:
+      triggerEmote({ predefined: 'tik' })
+
+      break
+
+    case Action.PLAYERTEKTO:
+      triggerEmote({ predefined: 'tektonik' })
+
+      break
+
+    case Action.PLAYERHAMMER:
+      triggerEmote({ predefined: 'hammer' })
+
       break
 
     //vide
