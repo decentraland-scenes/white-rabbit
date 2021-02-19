@@ -11,8 +11,8 @@ import { SpiralController } from './effects/spirals'
 import { tvScreenController } from './effects/screenColumns'
 import { GlassController } from './effects/glassWindows'
 import { transform } from '../../node_modules/typescript/lib/typescript'
-import { freeMode } from './showPlaying'
-import { Action, runAction } from './eventScripts'
+import { freeMode, sceneMessageBus } from './showPlaying'
+import { Action } from './eventScripts'
 
 let dashboardShape = new GLTFShape('models/dashboard.glb')
 let onButtonShape = new GLTFShape('models/on_button.glb')
@@ -189,7 +189,9 @@ class EffectDashboard {
       ButtonType.ON,
       () => {
         if (!freeMode) {
-          runAction(Action.SMOKE)
+          sceneMessageBus.emit('action', {
+            action: Action.SMOKE,
+          })
         }
       }
     )
@@ -199,7 +201,9 @@ class EffectDashboard {
       ButtonType.OFF,
       () => {
         if (!freeMode) {
-          runAction(Action.SMOKESTOP)
+          sceneMessageBus.emit('action', {
+            action: Action.SMOKESTOP,
+          })
         }
       }
     )
@@ -218,7 +222,9 @@ class EffectDashboard {
       ButtonType.ON,
       () => {
         if (!freeMode) {
-          runAction(Action.LASERSHOW)
+          sceneMessageBus.emit('action', {
+            action: Action.LASERSHOW,
+          })
         }
       }
     )
@@ -228,7 +234,9 @@ class EffectDashboard {
       ButtonType.OFF,
       () => {
         if (!freeMode) {
-          runAction(Action.LASERHIDE)
+          sceneMessageBus.emit('action', {
+            action: Action.LASERHIDE,
+          })
         }
       }
     )
@@ -247,7 +255,9 @@ class EffectDashboard {
       ButtonType.PLUS,
       () => {
         if (!freeMode) {
-          runAction(Action.LASERROTFAST)
+          sceneMessageBus.emit('action', {
+            action: Action.LASERROTFAST,
+          })
         }
       }
     )
@@ -257,7 +267,9 @@ class EffectDashboard {
       ButtonType.MINUS,
       () => {
         if (!freeMode) {
-          runAction(Action.LASERROTSLOW)
+          sceneMessageBus.emit('action', {
+            action: Action.LASERROTSLOW,
+          })
         }
       }
     )
@@ -267,7 +279,9 @@ class EffectDashboard {
       ButtonType.OFF,
       () => {
         if (!freeMode) {
-          runAction(Action.LASERROTOFF)
+          sceneMessageBus.emit('action', {
+            action: Action.LASERROTOFF,
+          })
         }
       }
     )
@@ -286,7 +300,9 @@ class EffectDashboard {
       ButtonType.ON,
       () => {
         if (!freeMode) {
-          runAction(Action.LASERPULSE)
+          sceneMessageBus.emit('action', {
+            action: Action.LASERPULSE,
+          })
         }
       }
     )
@@ -296,7 +312,9 @@ class EffectDashboard {
       ButtonType.OFF,
       () => {
         if (!freeMode) {
-          runAction(Action.LASERPULSEOFF)
+          sceneMessageBus.emit('action', {
+            action: Action.LASERPULSEOFF,
+          })
         }
       }
     )
