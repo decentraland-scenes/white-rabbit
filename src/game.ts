@@ -1,5 +1,6 @@
 import { scene } from './modules/scene'
 import { spawnTables } from './modules/tables'
+import { spawnEnvironment } from './modules/environment'
 
 import { movePlayerTo } from '@decentraland/RestrictedActions'
 import { initiateVJUI } from './modules/adminVJ'
@@ -21,6 +22,7 @@ engine.addEntity(shroomBuilding)
 // chairReflect1.addComponent(new Billboard(false,true, false))
 // engine.addEntity(chairReflect1)
 
+spawnEnvironment()
 spawnTables()
 
 initiateVJUI()
