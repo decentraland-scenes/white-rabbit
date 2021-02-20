@@ -1,9 +1,4 @@
-import {
-  checkTime,
-  showPlaying,
-  showPlayingFalse,
-  showPlayingTrue,
-} from './showPlaying'
+import { checkTime, showPlaying, showPlayingFalse } from './showPlaying'
 
 import {
   dotLightsControl,
@@ -17,22 +12,22 @@ import { PredefinedEmote, triggerEmote } from '@decentraland/RestrictedActions'
 
 export enum Action {
   STOPALL = 'stopall',
-  INTRO = 'intro',
-  SEMIHARD = 'semihard',
-  HARD = 'hard',
-  NORMAL = 'normal',
-  NORMAL2 = 'normal2',
-  CHILL = 'chill',
+  //   INTRO = 'intro',
+  //   SEMIHARD = 'semihard',
+  //   HARD = 'hard',
+  //   NORMAL = 'normal',
+  //   NORMAL2 = 'normal2',
+  //   CHILL = 'chill',
 
-  PREEPIC = 'preepic',
-  PREEPIC2 = 'preepic2',
-  PREEPIC3 = 'preepic3',
-  PREEPIC4 = 'preepic4',
-  EPIC1 = 'epic1',
-  EPIC2 = 'epic2',
+  //   PREEPIC = 'preepic',
+  //   PREEPIC2 = 'preepic2',
+  //   PREEPIC3 = 'preepic3',
+  //   PREEPIC4 = 'preepic4',
+  //   EPIC1 = 'epic1',
+  //   EPIC2 = 'epic2',
 
-  PUNCHI = 'punchi',
-  PUNCHI_02 = 'punchi_02',
+  //   PUNCHI = 'punchi',
+  //   PUNCHI_02 = 'punchi_02',
 
   // singles ///////////////
 
@@ -69,8 +64,8 @@ export enum Action {
   SPIRAL2HIDE = 'spiral2hide',
 
   // video
-  VIDEOPLAY = 'videoplay',
-  VIDEOSTOP = 'videostop',
+  //   VIDEOPLAY = 'videoplay',
+  //   VIDEOSTOP = 'videostop',
 
   // player emotes
   PLAYERWAVE = 'playerwave',
@@ -91,15 +86,15 @@ export enum Action {
   //   BUBLESOFF = 'bublesoff',
   //   VIDEOBUBLESOFF = 'videobublesoff',
 
-  RACAPPEAR = 'racappear',
-  RACGO = 'racgo',
-  RACBOUNCE = 'racbounce',
-  RACCHILL = 'racchill',
-  RACCLAP = 'racclap',
-  RACEPIC = 'racepic',
-  RACHORNS = 'rachorns',
-  RACMIXING = 'racmixing',
-  RACPLAY = 'racplay',
+  //   RACAPPEAR = 'racappear',
+  //   RACGO = 'racgo',
+  //   RACBOUNCE = 'racbounce',
+  //   RACCHILL = 'racchill',
+  //   RACCLAP = 'racclap',
+  //   RACEPIC = 'racepic',
+  //   RACHORNS = 'rachorns',
+  //   RACMIXING = 'racmixing',
+  //   RACPLAY = 'racplay',
   //   RACDECONSTRUCTED = 'racdeconstructed',
   //   RACDECONSTRUCT = 'racdeconstruct',
   //   RACRECONSTRUCT = 'racreconstruct',
@@ -113,85 +108,75 @@ export enum Action {
 export function runAction(action: Action) {
   switch (action) {
     case Action.STOPALL:
-      //   Pyrotechnics.hide()
-      //   lights_center_stage.hide()
-      //   lights_side_stage.hide()
-      //   flame.hide()
-      //   runAction(Action.SPEAKERSOFF)
-      //   runAction(Action.ELECTRICOFF)
-      //   runAction(Action.TRIANGLESOFF)
-      //   runAction(Action.FLARESOFF)
-      //   runAction(Action.FLOWEROFF)
-      //   stopLiftBubbles(bubbleLiftSystem)
-      //   FireConcertStage.hide()
-      //   bubbleScreenController.stopRandomBubbles()
-      //   bubbleScreenController.stopSpeakerBubbles()
-      //   deck1.hide()
-      //   deck2.hide()
+      smokeControl.stopSmoke()
+
+      laserControl.hide()
+      spiralControl.hideAll()
+      dotLightsControl.hide()
 
       break
 
-    case Action.INTRO:
-      //   runAction(Action.CENTERLIGHTS1)
-      //   runAction(Action.SIDELIGHTS2)
-      //   runAction(Action.SPEAKERS1)
-      //   runAction(Action.FLAMES3)
-      break
+    // case Action.INTRO:
+    //   //   runAction(Action.CENTERLIGHTS1)
+    //   //   runAction(Action.SIDELIGHTS2)
+    //   //   runAction(Action.SPEAKERS1)
+    //   //   runAction(Action.FLAMES3)
+    //   break
 
-    case Action.SEMIHARD:
-      //   runAction(Action.CENTERLIGHTS3)
-      //   runAction(Action.SIDELIGHTS1)
-      //   runAction(Action.SPEAKERS1)
-      //   runAction(Action.ELECTRIC1)
-      //   runAction(Action.TRIANGLES3)
-      //   runAction(Action.FLARES2)
-      //   runAction(Action.FLOWEROFF)
+    // case Action.SEMIHARD:
+    //   //   runAction(Action.CENTERLIGHTS3)
+    //   //   runAction(Action.SIDELIGHTS1)
+    //   //   runAction(Action.SPEAKERS1)
+    //   //   runAction(Action.ELECTRIC1)
+    //   //   runAction(Action.TRIANGLES3)
+    //   //   runAction(Action.FLARES2)
+    //   //   runAction(Action.FLOWEROFF)
 
-      break
+    //   break
 
-    case Action.HARD:
-      //   runAction(Action.CENTERLIGHTS2)
-      //   runAction(Action.SIDELIGHTS3)
-      //   runAction(Action.SPEAKERS2)
-      //   runAction(Action.FLAMES1)
-      //   runAction(Action.ELECTRIC2)
-      //   runAction(Action.TRIANGLES3)
-      //   runAction(Action.FLARES2)
-      //   runAction(Action.FLOWEROFF)
+    // case Action.HARD:
+    //   //   runAction(Action.CENTERLIGHTS2)
+    //   //   runAction(Action.SIDELIGHTS3)
+    //   //   runAction(Action.SPEAKERS2)
+    //   //   runAction(Action.FLAMES1)
+    //   //   runAction(Action.ELECTRIC2)
+    //   //   runAction(Action.TRIANGLES3)
+    //   //   runAction(Action.FLARES2)
+    //   //   runAction(Action.FLOWEROFF)
 
-      break
+    //   break
 
-    case Action.NORMAL:
-      //   runAction(Action.CENTERLIGHTS1)
-      //   runAction(Action.SIDELIGHTS1)
-      //   runAction(Action.SPEAKERS1)
-      //   runAction(Action.ELECTRICOFF)
-      //   runAction(Action.TRIANGLES2)
-      //   runAction(Action.FLARESOFF)
-      //   runAction(Action.FLOWER1)
+    // case Action.NORMAL:
+    //   //   runAction(Action.CENTERLIGHTS1)
+    //   //   runAction(Action.SIDELIGHTS1)
+    //   //   runAction(Action.SPEAKERS1)
+    //   //   runAction(Action.ELECTRICOFF)
+    //   //   runAction(Action.TRIANGLES2)
+    //   //   runAction(Action.FLARESOFF)
+    //   //   runAction(Action.FLOWER1)
 
-      break
+    //   break
 
-    case Action.NORMAL2:
-      //   runAction(Action.CENTERLIGHTS3)
-      //   runAction(Action.SIDELIGHTS2)
-      //   runAction(Action.SPEAKERS1)
-      //   runAction(Action.ELECTRICOFF)
-      //   runAction(Action.TRIANGLES2)
-      //   runAction(Action.FLARESOFF)
-      //   runAction(Action.FLOWER1)
+    // case Action.NORMAL2:
+    //   //   runAction(Action.CENTERLIGHTS3)
+    //   //   runAction(Action.SIDELIGHTS2)
+    //   //   runAction(Action.SPEAKERS1)
+    //   //   runAction(Action.ELECTRICOFF)
+    //   //   runAction(Action.TRIANGLES2)
+    //   //   runAction(Action.FLARESOFF)
+    //   //   runAction(Action.FLOWER1)
 
-      break
+    //   break
 
-    case Action.CHILL:
-      //   runAction(Action.CENTERLIGHTS3)
-      //   runAction(Action.SIDELIGHTS2)
-      //   runAction(Action.SPEAKERSOFF)
-      //   runAction(Action.ELECTRICOFF)
-      //   runAction(Action.TRIANGLES1)
-      //   runAction(Action.FLARES1)
-      //   runAction(Action.FLOWER1)
-      break
+    // case Action.CHILL:
+    //   //   runAction(Action.CENTERLIGHTS3)
+    //   //   runAction(Action.SIDELIGHTS2)
+    //   //   runAction(Action.SPEAKERSOFF)
+    //   //   runAction(Action.ELECTRICOFF)
+    //   //   runAction(Action.TRIANGLES1)
+    //   //   runAction(Action.FLARES1)
+    //   //   runAction(Action.FLOWER1)
+    //   break
 
     /// SINGLE ACTIONS
 
@@ -318,11 +303,11 @@ export function runAction(action: Action) {
       break
 
     //vide
-    case Action.VIDEOPLAY:
-      break
+    // case Action.VIDEOPLAY:
+    //   break
 
-    case Action.VIDEOSTOP:
-      break
+    // case Action.VIDEOSTOP:
+    //   break
 
     // case Action.SPEAKERS1:
     //   speakers.appear()
@@ -440,17 +425,45 @@ export function runAction(action: Action) {
 
 export let ShowScripts: any = {
   DEFAULT: [
-    { time: 0, event: Action.SMOKESTOP },
-    { time: 5, event: Action.DOTSSHOW },
-    { time: 10, event: Action.SMOKE },
-    { time: 20, event: Action.SMOKESTOP },
-    { time: 20, event: Action.LASERSHOW },
-    { time: 20, event: Action.GLASSBREAK },
-    { time: 30, event: Action.LASERROT },
-    { time: 30, event: Action.SPIRALSHOW },
-    { time: 50, event: Action.SMOKE },
-    { time: 30, event: Action.LASERPULSE },
-    { time: 60, event: Action.SMOKE },
+    { event: Action.STOPALL, time: 0 },
+    { event: Action.SMOKE, time: 1 },
+    { event: Action.LASERSHOW, time: 10 },
+    { event: Action.LASERROT, time: 20 },
+    { event: Action.LASERPULSE, time: 20 },
+    { event: Action.SMOKESTOP, time: 57 },
+    { event: Action.LASERROTFAST, time: 57 },
+    { event: Action.LASERROTFAST, time: 61 },
+    { event: Action.SPIRAL1SHOW, time: 77 },
+    { event: Action.LASERROTSLOW, time: 88 },
+    { event: Action.LASERROTSLOW, time: 90 },
+    { event: Action.SPIRALSHOW, time: 120 },
+    { event: Action.DOTSSHOW, time: 144 },
+    { event: Action.DOTSSTOPPULSE, time: 151 },
+    { event: Action.LASERHIDE, time: 183 },
+    { event: Action.SPIRAL2SHOW, time: 197 },
+    { event: Action.LASERSHOW, time: 260 },
+    { event: Action.LASERROTOFF, time: 260 },
+    { event: Action.LASERPULSE, time: 260 },
+    { event: Action.DOTSHIDE, time: 276 },
+    { event: Action.SMOKE, time: 278 },
+    { event: Action.LASERHIDE, time: 343 },
+    { event: Action.SPIRAL1SHOW, time: 397 },
+    { event: Action.GLASSBREAK, time: 436 },
+    { event: Action.LASERSHOW, time: 436 },
+    { event: Action.LASERROTFAST, time: 436 },
+    { event: Action.LASERROTFAST, time: 436 },
+    { event: Action.SMOKESTOP, time: 436 },
+    { event: Action.DOTSSHOW, time: 483 },
+    { event: Action.DOTSPULSE, time: 498 },
+    { event: Action.SPIRALSHOW, time: 498 },
+    { event: Action.LASERROTSLOW, time: 513 },
+    { event: Action.LASERPULSE, time: 513 },
+    { event: Action.LASERROTSLOW, time: 513 },
+    { event: Action.LASERROTSLOW, time: 576 },
+    { event: Action.LASERROTSLOW, time: 576 },
+    { event: Action.SPIRALHIDE, time: 576 },
+    { event: Action.LASERPULSEOFF, time: 607 },
+    { event: Action.LASERROTFAST, time: 607 },
   ],
   RAC: [],
   TEST: [

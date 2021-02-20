@@ -53,8 +53,8 @@ export async function checkTime() {
     let toDate = new Date(json.datetime)
     log(toDate)
 
-    let seconds = toDate.getSeconds() * 1000
-    //let seconds = (toDate.getMinutes() * 60 + toDate.getSeconds() ) * 1000
+    //let seconds = toDate.getSeconds() * 1000
+    let seconds = ((toDate.getMinutes() % 10) * 60 + toDate.getSeconds()) * 1000
 
     StartShow(1, Date.now() - seconds)
 

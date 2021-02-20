@@ -62,14 +62,14 @@
       "name": "spawn1",
       "default": true,
       "position": {
-        "x": 0,
-        "y": 0,
-        "z": 0
+        "x": [2,8],
+        "y": 12,
+        "z": [4,8]
       },
       "cameraTarget": {
-        "x": 8,
-        "y": 1,
-        "z": 8
+        "x": 16,
+        "y": 12,
+        "z": 16
       }
     }
   ]

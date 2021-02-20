@@ -11,6 +11,8 @@ import { SpiralController } from './effects/spirals'
 import { tvScreenController } from './effects/screenColumns'
 import { GlassController } from './effects/glassWindows'
 import { transform } from '../../node_modules/typescript/lib/typescript'
+import { freeMode, sceneMessageBus } from './showPlaying'
+import { Action } from './eventScripts'
 
 let dashboardShape = new GLTFShape('models/dashboard.glb')
 let onButtonShape = new GLTFShape('models/on_button.glb')
@@ -186,7 +188,11 @@ class EffectDashboard {
       subButtonSize,
       ButtonType.ON,
       () => {
-        smokeControl.startSmoke()
+        if (!freeMode) {
+          sceneMessageBus.emit('action', {
+            action: Action.SMOKE,
+          })
+        }
       }
     )
     smokeSection.addButton(
@@ -194,7 +200,11 @@ class EffectDashboard {
       subButtonSize,
       ButtonType.OFF,
       () => {
-        smokeControl.stopSmoke()
+        if (!freeMode) {
+          sceneMessageBus.emit('action', {
+            action: Action.SMOKESTOP,
+          })
+        }
       }
     )
     smokeSection.setParent(this.effectUIRoot)
@@ -211,7 +221,11 @@ class EffectDashboard {
       subButtonSize,
       ButtonType.ON,
       () => {
-        laserControl.show()
+        if (!freeMode) {
+          sceneMessageBus.emit('action', {
+            action: Action.LASERSHOW,
+          })
+        }
       }
     )
     laserSection.addButton(
@@ -219,7 +233,11 @@ class EffectDashboard {
       subButtonSize,
       ButtonType.OFF,
       () => {
-        laserControl.hide()
+        if (!freeMode) {
+          sceneMessageBus.emit('action', {
+            action: Action.LASERHIDE,
+          })
+        }
       }
     )
     laserSection.setParent(this.effectUIRoot)
@@ -236,7 +254,11 @@ class EffectDashboard {
       subButtonSize,
       ButtonType.PLUS,
       () => {
-        laserControl.changeRotationSpeedBy(10)
+        if (!freeMode) {
+          sceneMessageBus.emit('action', {
+            action: Action.LASERROTFAST,
+          })
+        }
       }
     )
     laserSpeedSection.addButton(
@@ -244,7 +266,11 @@ class EffectDashboard {
       subButtonSize,
       ButtonType.MINUS,
       () => {
-        laserControl.changeRotationSpeedBy(-10)
+        if (!freeMode) {
+          sceneMessageBus.emit('action', {
+            action: Action.LASERROTSLOW,
+          })
+        }
       }
     )
     laserSpeedSection.addButton(
@@ -252,7 +278,11 @@ class EffectDashboard {
       subButtonSize,
       ButtonType.OFF,
       () => {
-        laserControl.setRotationSpeed(0)
+        if (!freeMode) {
+          sceneMessageBus.emit('action', {
+            action: Action.LASERROTOFF,
+          })
+        }
       }
     )
     laserSpeedSection.setParent(this.effectUIRoot)
@@ -269,7 +299,11 @@ class EffectDashboard {
       subButtonSize,
       ButtonType.ON,
       () => {
-        laserControl.activateFanPulse(true)
+        if (!freeMode) {
+          sceneMessageBus.emit('action', {
+            action: Action.LASERPULSE,
+          })
+        }
       }
     )
     laserPulseSection.addButton(
@@ -277,7 +311,11 @@ class EffectDashboard {
       subButtonSize,
       ButtonType.OFF,
       () => {
-        laserControl.activateFanPulse(false)
+        if (!freeMode) {
+          sceneMessageBus.emit('action', {
+            action: Action.LASERPULSEOFF,
+          })
+        }
       }
     )
 
