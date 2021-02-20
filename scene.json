@@ -1,7 +1,9 @@
 {
   "display": {
-    "title": "interactive-text",
-    "favicon": "favicon_asset"
+    "title": "White Rabbit Club",
+	"description": "A surreal 24/7 Night Club.",
+    "favicon": "favicon_asset",
+	"navmapThumbnail": "images/screenshot/mushroom.jpg"
   },
   "contact": {
     "name": "author-name",
