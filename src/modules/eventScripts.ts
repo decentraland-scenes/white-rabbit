@@ -12,22 +12,6 @@ import { PredefinedEmote, triggerEmote } from '@decentraland/RestrictedActions'
 
 export enum Action {
   STOPALL = 'stopall',
-  //   INTRO = 'intro',
-  //   SEMIHARD = 'semihard',
-  //   HARD = 'hard',
-  //   NORMAL = 'normal',
-  //   NORMAL2 = 'normal2',
-  //   CHILL = 'chill',
-
-  //   PREEPIC = 'preepic',
-  //   PREEPIC2 = 'preepic2',
-  //   PREEPIC3 = 'preepic3',
-  //   PREEPIC4 = 'preepic4',
-  //   EPIC1 = 'epic1',
-  //   EPIC2 = 'epic2',
-
-  //   PUNCHI = 'punchi',
-  //   PUNCHI_02 = 'punchi_02',
 
   // singles ///////////////
 
@@ -63,10 +47,6 @@ export enum Action {
   SPIRAL2SHOW = 'spiral2show',
   SPIRAL2HIDE = 'spiral2hide',
 
-  // video
-  //   VIDEOPLAY = 'videoplay',
-  //   VIDEOSTOP = 'videostop',
-
   // player emotes
   PLAYERWAVE = 'playerwave',
   PLAYERJUMP = 'playerjump',
@@ -80,6 +60,14 @@ export enum Action {
   PLAYERTEKTO = 'playertekto',
   PLAYERHAMMER = 'playerhammer',
 
+  //////////////// unused actions  /////////////////
+  //   INTRO = 'intro',
+  //   SEMIHARD = 'semihard',
+  //   HARD = 'hard',
+  //   NORMAL = 'normal',
+  //   NORMAL2 = 'normal2',
+  //   CHILL = 'chill',
+  
   //   BUBLES = 'bubles',
   //   VIDEOBUBLES = 'videobubles',
   //   FEWVIDOEBUBBLES = 'fewvideobubbles',
@@ -103,6 +91,9 @@ export enum Action {
   //   RACGTEASER = 'racrgteaser',
 
   //   TELEPORTS = 'teleports',
+  
+  //   VIDEOPLAY = 'videoplay',
+  //   VIDEOSTOP = 'videostop',
 }
 
 export function runAction(action: Action) {
@@ -116,68 +107,7 @@ export function runAction(action: Action) {
 
       break
 
-    // case Action.INTRO:
-    //   //   runAction(Action.CENTERLIGHTS1)
-    //   //   runAction(Action.SIDELIGHTS2)
-    //   //   runAction(Action.SPEAKERS1)
-    //   //   runAction(Action.FLAMES3)
-    //   break
-
-    // case Action.SEMIHARD:
-    //   //   runAction(Action.CENTERLIGHTS3)
-    //   //   runAction(Action.SIDELIGHTS1)
-    //   //   runAction(Action.SPEAKERS1)
-    //   //   runAction(Action.ELECTRIC1)
-    //   //   runAction(Action.TRIANGLES3)
-    //   //   runAction(Action.FLARES2)
-    //   //   runAction(Action.FLOWEROFF)
-
-    //   break
-
-    // case Action.HARD:
-    //   //   runAction(Action.CENTERLIGHTS2)
-    //   //   runAction(Action.SIDELIGHTS3)
-    //   //   runAction(Action.SPEAKERS2)
-    //   //   runAction(Action.FLAMES1)
-    //   //   runAction(Action.ELECTRIC2)
-    //   //   runAction(Action.TRIANGLES3)
-    //   //   runAction(Action.FLARES2)
-    //   //   runAction(Action.FLOWEROFF)
-
-    //   break
-
-    // case Action.NORMAL:
-    //   //   runAction(Action.CENTERLIGHTS1)
-    //   //   runAction(Action.SIDELIGHTS1)
-    //   //   runAction(Action.SPEAKERS1)
-    //   //   runAction(Action.ELECTRICOFF)
-    //   //   runAction(Action.TRIANGLES2)
-    //   //   runAction(Action.FLARESOFF)
-    //   //   runAction(Action.FLOWER1)
-
-    //   break
-
-    // case Action.NORMAL2:
-    //   //   runAction(Action.CENTERLIGHTS3)
-    //   //   runAction(Action.SIDELIGHTS2)
-    //   //   runAction(Action.SPEAKERS1)
-    //   //   runAction(Action.ELECTRICOFF)
-    //   //   runAction(Action.TRIANGLES2)
-    //   //   runAction(Action.FLARESOFF)
-    //   //   runAction(Action.FLOWER1)
-
-    //   break
-
-    // case Action.CHILL:
-    //   //   runAction(Action.CENTERLIGHTS3)
-    //   //   runAction(Action.SIDELIGHTS2)
-    //   //   runAction(Action.SPEAKERSOFF)
-    //   //   runAction(Action.ELECTRICOFF)
-    //   //   runAction(Action.TRIANGLES1)
-    //   //   runAction(Action.FLARES1)
-    //   //   runAction(Action.FLOWER1)
-    //   break
-
+   
     /// SINGLE ACTIONS
 
     case Action.SMOKE:
@@ -302,7 +232,71 @@ export function runAction(action: Action) {
 
       break
 
-    //vide
+    //////////////// unused actions  /////////////////
+      
+    // case Action.INTRO:
+    //   //   runAction(Action.CENTERLIGHTS1)
+    //   //   runAction(Action.SIDELIGHTS2)
+    //   //   runAction(Action.SPEAKERS1)
+    //   //   runAction(Action.FLAMES3)
+    //   break
+
+    // case Action.SEMIHARD:
+    //   //   runAction(Action.CENTERLIGHTS3)
+    //   //   runAction(Action.SIDELIGHTS1)
+    //   //   runAction(Action.SPEAKERS1)
+    //   //   runAction(Action.ELECTRIC1)
+    //   //   runAction(Action.TRIANGLES3)
+    //   //   runAction(Action.FLARES2)
+    //   //   runAction(Action.FLOWEROFF)
+
+    //   break
+
+    // case Action.HARD:
+    //   //   runAction(Action.CENTERLIGHTS2)
+    //   //   runAction(Action.SIDELIGHTS3)
+    //   //   runAction(Action.SPEAKERS2)
+    //   //   runAction(Action.FLAMES1)
+    //   //   runAction(Action.ELECTRIC2)
+    //   //   runAction(Action.TRIANGLES3)
+    //   //   runAction(Action.FLARES2)
+    //   //   runAction(Action.FLOWEROFF)
+
+    //   break
+
+    // case Action.NORMAL:
+    //   //   runAction(Action.CENTERLIGHTS1)
+    //   //   runAction(Action.SIDELIGHTS1)
+    //   //   runAction(Action.SPEAKERS1)
+    //   //   runAction(Action.ELECTRICOFF)
+    //   //   runAction(Action.TRIANGLES2)
+    //   //   runAction(Action.FLARESOFF)
+    //   //   runAction(Action.FLOWER1)
+
+    //   break
+
+    // case Action.NORMAL2:
+    //   //   runAction(Action.CENTERLIGHTS3)
+    //   //   runAction(Action.SIDELIGHTS2)
+    //   //   runAction(Action.SPEAKERS1)
+    //   //   runAction(Action.ELECTRICOFF)
+    //   //   runAction(Action.TRIANGLES2)
+    //   //   runAction(Action.FLARESOFF)
+    //   //   runAction(Action.FLOWER1)
+
+    //   break
+
+    // case Action.CHILL:
+    //   //   runAction(Action.CENTERLIGHTS3)
+    //   //   runAction(Action.SIDELIGHTS2)
+    //   //   runAction(Action.SPEAKERSOFF)
+    //   //   runAction(Action.ELECTRICOFF)
+    //   //   runAction(Action.TRIANGLES1)
+    //   //   runAction(Action.FLARES1)
+    //   //   runAction(Action.FLOWER1)
+    //   break
+
+    //video
     // case Action.VIDEOPLAY:
     //   break
 
@@ -512,7 +506,6 @@ export class RunEvents {
           runAction(Action.STOPALL)
           showPlayingFalse()
         }
-        //engine.removeSystem(this)
       }
     }
   }
