@@ -108,40 +108,6 @@ export class Synced extends Entity {
       } else {
         playOnceAndIdle(this, newAnim, duration)
       }
-
-      //}
-
-      //   newAnim.looping = false
-      //   if (duration) {
-      //     this.endAnimTimer.addComponentOrReplace(
-      //       new utils.Delay(duration * 1000, () => {
-      //         newAnim.stop()
-      //         if (this.idleAnim) {
-      //           this.idleAnim.play()
-      //           this.lastPlayedAnim = this.idleAnim
-      //         }
-      //       })
-      //     )
-
-      //     if (interval) {
-      //       this.endAnimTimer.addComponentOrReplace(
-      //         new utils.Interval(interval, () => {
-      //           this.lastPlayedAnim.stop()
-      //           newAnim.play()
-      //           this.lastPlayedAnim = newAnim
-      //           this.endAnimTimer.addComponentOrReplace(
-      //             new utils.Delay(duration * 1000, () => {
-      //               newAnim.stop()
-      //               if (this.idleAnim) {
-      //                 this.idleAnim.play()
-      //                 this.lastPlayedAnim = this.idleAnim
-      //               }
-      //             })
-      //           )
-      //         })
-      //       )
-      //     }
-      //   }
     } else {
       newAnim.looping = true
       newAnim.stop()
